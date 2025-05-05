@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosewood Boutique · Demo</title>
+
+<!-- type + icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ---------- brand palette ---------- */
+:root{
+  --porcelain:#fbf8f4;
+  --rose:#c76d6d;
+  --sage:#78866b;
+  --ink:#403b37;
+  --paper:#ffffff;
+  --border:#e9e4de;
+  --sans:"Quicksand",sans-serif;
+  --serif:"Playfair Display",serif;
+}
+/* ---------- base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:1rem/1.75 var(--sans);color:var(--ink);background:var(--porcelain)}
+h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:.4px}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);color:var(--rose)}
+h2{font-size:clamp(2rem,5vw,2.8rem)}
+h3{font-size:clamp(1.3rem,3vw,1.6rem);color:var(--rose)}
+a{color:inherit;text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.85}
+img{width:100%;height:auto;display:block;border:1px solid var(--border)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;background:rgba(251,248,244,.9);
+  border-bottom:1px solid var(--border);backdrop-filter:blur(6px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 22px;z-index:900}
+.brand{font-family:var(--serif);font-size:1.8rem;color:var(--rose)}
+.links{display:flex;gap:26px}
+.links a{font-weight:500;position:relative}
+.links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--rose);transition:width .2s}
+.links a:hover::after{width:100%}
+.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer}
+.burger span{height:3px;background:var(--ink)}
+@media(max-width:800px){
+  .links{position:fixed;inset:60px 0 auto 0;background:var(--paper);
+    flex-direction:column;gap:22px;padding:32px 24px;border-bottom:1px solid var(--border);
+    transform:translateY(-120%);transition:transform .3s}
+  .links.open{transform:translateY(0)}
+  .burger{display:flex}
+}
+
+/* ---------- hero ---------- */
+.hero{margin-top:60px;position:relative;height:83vh;min-height:460px;
+  background:url("https://picsum.photos/seed/vintageHero/1600/900") center/cover}
+.hero::before{content:"";position:absolute;inset:0;
+  background:rgba(199,109,109,.5)}
+.heroContent{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;padding-left:10%}
+.heroContent p{margin-top:20px;max-width:36ch}
+.shopBtn{display:inline-block;margin-top:34px;padding:.9rem 2rem;
+  background:var(--sage);color:#fff;font-weight:500;border-radius:4px}
+
+/* ---------- util ---------- */
+section{padding:clamp(90px,12vw,140px) clamp(22px,8vw,100px)}
+.center{max-width:880px;margin-inline:auto;text-align:center}
+
+/* ---------- collection grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:28px;margin-top:60px}
+.item{background:var(--paper);display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--border)}
+.item h4{font-family:var(--serif);font-weight:700;font-size:1.05rem}
+.price{color:var(--sage);font-weight:600;font-size:.95rem}
+
+/* ---------- story block ---------- */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.story img{border:0}
+.story p{margin-top:12px}
+@media(max-width:800px){.story{grid-template-columns:1fr}}
+
+/* ---------- insta strip ---------- */
+.insta{margin-top:50px;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.insta img{border:0}
+
+/* ---------- banner ---------- */
+.banner{background:var(--rose);color:#fff;text-align:center;padding:90px 16px}
+.banner a{display:inline-block;margin-top:28px;padding:.75rem 1.8rem;background:#fff;color:var(--rose);font-weight:600;border-radius:4px}
+
+/* ---------- footer ---------- */
+footer{text-align:center;font-size:.8rem;color:#645f5b;padding:60px 16px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Rosewood</div>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  <div class="links" id="navLinks">
+    <a href="#collection">Shop</a>
+    <a href="#story">Story</a>
+    <a href="#visit">Visit</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="heroContent">
+    <h1>Curated Vintage Finds</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <a class="shopBtn" href="#collection">Browse&nbsp;Collection</a>
+  </div>
+</header>
+
+<!-- collection -->
+<section id="collection">
+  <div class="center">
+    <h2>Spring&nbsp;Edit</h2>
+    <p style="margin-top:10px">One-of-a-kind pieces — first come, first served.</p>
+  </div>
+  <div class="grid">
+    <div class="item">
+      <img src="https://picsum.photos/seed/v1/400/500" alt="">
+      <h4>Floral&nbsp;Tea&nbsp;Dress</h4>
+      <span class="price">$65</span>
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/seed/v2/400/500" alt="">
+      <h4>Leather&nbsp;Satchel</h4>
+      <span class="price">$120</span>
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/seed/v3/400/500" alt="">
+      <h4>Pearl&nbsp;Brooch</h4>
+      <span class="price">$38</span>
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/seed/v4/400/500" alt="">
+      <h4>Linen&nbsp;Blazer</h4>
+      <span class="price">$94</span>
+    </div>
+  </div>
+</section>
+
+<!-- story -->
+<section id="story">
+  <div class="story">
+    <img src="https://picsum.photos/seed/story/800/650" alt="">
+    <div>
+      <h2>Our&nbsp;Story</h2>
+      <p>Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.</p>
+      <p>Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- insta feed -->
+<section>
+  <div class="center">
+    <h2>#RosewoodReels</h2>
+  </div>
+  <div class="insta">
+    <img src="https://picsum.photos/seed/i1/300/300" alt="">
+    <img src="https://picsum.photos/seed/i2/300/300" alt="">
+    <img src="https://picsum.photos/seed/i3/300/300" alt="">
+    <img src="https://picsum.photos/seed/i4/300/300" alt="">
+    <img src="https://picsum.photos/seed/i5/300/300" alt="">
+    <img src="https://picsum.photos/seed/i6/300/300" alt="">
+  </div>
+</section>
+
+<!-- visit banner -->
+<section id="visit" class="banner">
+  <h2>Visit Rosewood&nbsp;Boutique</h2>
+  <a href="#">Get&nbsp;Directions</a>
+</section>
+
+<footer>&copy; <span id="yr"></span> Rosewood Boutique — Demo Layout</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const burger = document.getElementById('burger'),
+      nav = document.getElementById('navLinks');
+burger.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>

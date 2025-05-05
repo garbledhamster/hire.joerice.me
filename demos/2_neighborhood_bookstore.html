@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neighborhood Bookstore · Demo</title>
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Bebas+Neue&family=Bitter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fffdf8;--fg:#3b2d26;--accent:#ad6b3c;--border:#000;
+  --body:"Space Grotesk",sans-serif;--head:"Bitter",serif;--display:"Bebas Neue","Impact",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:1rem/1.65 var(--body);background:var(--bg);color:var(--fg)}
+h1,h2,h3{font-family:var(--head)}
+h1{font-size:clamp(2.2rem,6vw,3.3rem);font-weight:600}
+h2{font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:600}
+h3{font-size:clamp(1.25rem,3.5vw,1.6rem);font-weight:600}
+a{color:inherit;text-decoration:none}
+section{padding:clamp(60px,9vw,96px) clamp(16px,6vw,72px)}
+img{display:block;width:100%;height:auto;border:2px solid var(--border)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:52px}
+.ctaBtn{display:inline-block;margin-top:24px;background:var(--accent);color:#fff;
+  padding:.8rem 1.6rem;border:2px solid var(--border);font-family:var(--display);letter-spacing:.5px;font-size:1.05rem;transition:background .2s}
+.ctaBtn:hover{background:#7d4d29}
+
+/* shelf cards */
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-top:48px}
+.card{background:#fff;border:2px solid var(--border);padding:24px;display:flex;flex-direction:column;gap:12px}
+.card h3{font-family:var(--display);letter-spacing:1px;color:var(--accent)}
+.card p{font-size:.92rem}
+
+/* events */
+.eventsList{margin-top:40px;border:2px solid var(--border)}
+.eventRow{display:flex;flex-wrap:wrap}
+.eventRow div{flex:1 1 160px;padding:18px;border-bottom:2px solid var(--border)}
+.eventRow div:last-child{border-left:2px solid var(--border)}
+.eventRow:last-child div{border-bottom:0}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.about ul{margin-top:18px;line-height:1.7}
+
+/* testimonials */
+.testiWrap{max-width:900px;margin-inline:auto;text-align:center}
+.testiGrid{display:flex;flex-direction:column;gap:30px;margin-top:40px}
+.testiItem{display:flex;flex-direction:column;align-items:center;gap:14px}
+.avatar{width:88px;height:88px;border-radius:50%;border:2px solid var(--border);object-fit:cover}
+.quote{font-size:1.05rem;font-style:italic;max-width:55ch}
+.client{font-family:var(--display);letter-spacing:.5px;color:var(--accent)}
+
+/* footer banner */
+.banner{background:var(--accent);color:#fff;text-align:center;padding:60px 16px}
+.banner a{border:2px solid var(--border);background:#fff;color:var(--fg);padding:.7rem 1.5rem;font-family:var(--display);transition:background .2s}
+.banner a:hover{background:#ffe9d5}
+
+/* footer */
+footer{border-top:2px solid var(--border);padding:38px 16px;text-align:center;font-size:.8rem;color:#665d57;font-family:var(--display)}
+
+@media(max-width:800px){
+  .hero,.about{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Welcome to <span style="color:var(--accent)">Leaf&nbsp;&amp;&nbsp;Letter</span></h1>
+    <p style="max-width:50ch;margin-top:14px">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis
+      consectetur purus sit amet fermentum. Sed posuere consectetur est at
+      lobortis.
+    </p>
+    <a class="ctaBtn" href="#events">Upcoming&nbsp;Events</a>
+  </div>
+  <img src="https://picsum.photos/seed/bookshop/900/650" alt="Bookstore interior">
+</section>
+
+<!-- FEATURED SHELVES -->
+<section>
+  <h2 style="text-align:center">Explore&nbsp;Our&nbsp;Shelves</h2>
+  <div class="shelf">
+    <div class="card">
+      <h3>New&nbsp;Arrivals</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+    </div>
+    <div class="card">
+      <h3>Staff&nbsp;Picks</h3>
+      <p>Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit.</p>
+    </div>
+    <div class="card">
+      <h3>Children's&nbsp;Corner</h3>
+      <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+    </div>
+    <div class="card">
+      <h3>Local&nbsp;Authors</h3>
+      <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <h2 style="text-align:center">This&nbsp;Month&nbsp;in&nbsp;Store</h2>
+  <div class="eventsList">
+    <div class="eventRow">
+      <div><strong>Mar&nbsp;10</strong></div>
+      <div>Story&nbsp;Time: "Sunny&nbsp;Days"</div>
+      <div>10 AM</div>
+    </div>
+    <div class="eventRow">
+      <div><strong>Mar&nbsp;14</strong></div>
+      <div>Author&nbsp;Signing: Jane&nbsp;Smith</div>
+      <div>6 PM</div>
+    </div>
+    <div class="eventRow">
+      <div><strong>Mar&nbsp;28</strong></div>
+      <div>Poetry&nbsp;Open&nbsp;Mic</div>
+      <div>7 PM</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <img src="https://picsum.photos/seed/readingnook/800/600" alt="Cozy reading nook">
+  <div>
+    <h2>About&nbsp;Our&nbsp;Shop</h2>
+    <p style="margin-top:12px;max-width:50ch">
+      Donec ullamcorper nulla non metus auctor fringilla. Nullam quis risus eget
+      urna mollis. Etiam porta sem malesuada magna mollis euismod.
+    </p>
+    <ul>
+      <li>✓ Family-owned since 1995</li>
+      <li>✓ Free weekly community events</li>
+      <li>✓ Complimentary coffee while you browse</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="testiWrap">
+    <h2>Word&nbsp;on&nbsp;the&nbsp;Street</h2>
+    <div class="testiGrid">
+      <div class="testiItem">
+        <img class="avatar" src="https://i.pravatar.cc/150?img=12" alt="Customer avatar">
+        <p class="quote">“Vestibulum id ligula porta felis euismod semper. Best bookshop in town!”</p>
+        <p class="client">John&nbsp;D.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="banner">
+  <h2>See&nbsp;You&nbsp;in&nbsp;the&nbsp;Stacks!</h2>
+  <a href="#">Get&nbsp;Directions</a>
+</section>
+
+<footer>&copy; <span id="yr"></span> Leaf&nbsp;&amp;&nbsp;Letter · Demo Layout</footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+</body>
+</html>

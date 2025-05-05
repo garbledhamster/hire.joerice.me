@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nebula Studio · Demo</title>
+
+<!-- type + icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Barlow+Condensed:wght@700&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ---------- COLOR SYSTEM ---------- */
+:root {
+  --bg: #111214;
+  --ink: #c9cbd1;
+  --accent: #ff2d95;
+  --accent-b: #00cfd8;
+  --surface: #1c1e22;
+  --border: #2b2d32;
+  --sans: "Inter", sans-serif;
+  --display: "Barlow Condensed", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 1rem/1.7 var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 4rem);
+  color: #fff;
+}
+
+h2 {
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  color: #fff;
+}
+
+h3 {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  color: var(--accent);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+
+a:hover {
+  opacity: .85;
+}
+
+/* ---------- OVERLAY NAV ---------- */
+#burger {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 1200;
+  width: 32px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#burger span {
+  height: 3px;
+  background: #fff;
+}
+
+#overlayNav {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 18, 20, .95);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 42px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s;
+  z-index: 1100;
+}
+
+#overlayNav.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#overlayNav a {
+  font-family: var(--display);
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  height: 100vh;
+  min-height: 540px;
+  background: url("https://picsum.photos/seed/creativehero/1600/900") center/cover;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0, 207, 216, .55), rgba(255, 45, 149, .5));
+  mix-blend-mode: overlay;
+}
+
+.heroContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 12%;
+  max-width: 700px;
+}
+
+.heroContent p {
+  margin-top: 22px;
+  max-width: 38ch;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 34px;
+  background: var(--accent);
+  color: #fff;
+  padding: 1rem 2.2rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+/* ---------- SECTIONS ---------- */
+section {
+  padding: clamp(90px, 12vw, 140px) clamp(22px, 8vw, 100px);
+}
+
+.centerTxt {
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto 60px;
+}
+
+/* ---------- PORTFOLIO — masonry --------- */
+#masonry {
+  column-count: 3;
+  column-gap: 18px;
+}
+
+@media(max-width:900px) {
+  #masonry {
+    column-count: 2;
+  }
+}
+
+@media(max-width:600px) {
+  #masonry {
+    column-count: 1;
+  }
+}
+
+.thumb {
+  width: 100%;
+  margin-bottom: 18px;
+  display: block;
+  border: 2px solid var(--border);
+  transition: transform .3s;
+}
+
+.thumb:hover {
+  transform: scale(1.03);
+}
+
+/* ---------- SERVICES STRIP ---------- */
+.serviceStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 34px;
+  justify-content: center;
+}
+
+.serviceCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px 30px;
+  width: 300px;
+}
+
+.serviceCard i {
+  font-size: 2.2rem;
+  color: var(--accent-b);
+}
+
+.serviceCard p {
+  margin-top: 10px;
+  font-size: .9rem;
+  color: #c3c6cb;
+}
+
+/* ---------- TESTIMONIAL ---------- */
+.testi {
+  background: var(--surface);
+  border-left: 6px solid var(--accent);
+  padding: 28px 32px;
+  max-width: 680px;
+  margin: 0 auto;
+  font-style: italic;
+  line-height: 1.6;
+  color: #e0e2e4;
+}
+
+/* ---------- CONTACT BANNER ---------- */
+.banner {
+  background: linear-gradient(100deg, var(--accent), var(--accent-b));
+  text-align: center;
+  padding: 90px 16px;
+}
+
+.banner h2 {
+  color: #111;
+}
+
+.banner a {
+  display: inline-block;
+  margin-top: 32px;
+  background: #111;
+  color: #fff;
+  padding: .9rem 2.4rem;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  font-size: .8rem;
+  color: #8e9298;
+  padding: 70px 16px;
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+
+<body>
+
+<!-- overlay nav -->
+<div id="overlayNav">
+  <a href="#work">Work</a>
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- burger -->
+<div id="burger"><span></span><span></span><span></span></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="heroContent">
+    <h1>We craft visual&nbsp;stories</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</p>
+    <a href="#work" class="cta">See Portfolio</a>
+  </div>
+</header>
+
+<!-- PORTFOLIO -->
+<section id="work">
+  <div class="centerTxt">
+    <h2>Selected&nbsp;Work</h2>
+  </div>
+  <div id="masonry">
+    <img class="thumb" src="https://picsum.photos/seed/1/600/800" alt="Placeholder art">
+    <img class="thumb" src="https://picsum.photos/seed/2/600/500" alt="Placeholder art">
+    <img class="thumb" src="https://picsum.photos/seed/3/600/700" alt="Placeholder art">
+    <img class="thumb" src="https://picsum.photos/seed/4/600/600" alt="Placeholder art">
+    <img class="thumb" src="https://picsum.photos/seed/5/600/450" alt="Placeholder art">
+    <img class="thumb" src="https://picsum.photos/seed/6/600/760" alt="Placeholder art">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="centerTxt">
+    <h2>What&nbsp;We&nbsp;Do</h2>
+  </div>
+  <div class="serviceStrip">
+    <div class="serviceCard">
+      <i class="fa-solid fa-pen-ruler"></i>
+      <h3>Brand&nbsp;Identity</h3>
+      <p>Logos, color systems and voice guidelines.</p>
+    </div>
+    <div class="serviceCard">
+      <i class="fa-solid fa-display"></i>
+      <h3>Web&nbsp;Design</h3>
+      <p>Responsive, accessible and lightning-fast sites.</p>
+    </div>
+    <div class="serviceCard">
+      <i class="fa-solid fa-photo-film"></i>
+      <h3>Content&nbsp;Creation</h3>
+      <p>Photography, video and motion for social &amp; ads.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section id="about">
+  <div class="centerTxt">
+    <h2>Clients&nbsp;Say</h2>
+  </div>
+  <blockquote class="testi">
+    “Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla. Best creative
+    partner we've hired, period.”
+  </blockquote>
+</section>
+
+<!-- CONTACT BANNER -->
+<section id="contact" class="banner">
+  <h2>Ready to elevate your brand?</h2>
+  <a href="#">Start&nbsp;a&nbsp;Project</a>
+</section>
+
+<footer>&copy; <span id="yr"></span> Nebula&nbsp;Studio • Demo Layout</footer>
+
+<script>
+/* year */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* overlay nav */
+const burger = document.getElementById('burger');
+const nav = document.getElementById('overlayNav');
+burger.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+
+</html>
