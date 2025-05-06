@@ -3,209 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hire Joe Rice · Rapid Websites & Care Plans</title>
+<title>Hire Joe Rice · Services Hub</title>
 
+<!-- brand fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 
-<style>
-:root{--bg:#fff;--fg:#111;--border:#000;--yellow:#ffd60a;
-      --font:"Space Grotesk",sans-serif;--head:"Bebas Neue","Impact",sans-serif;}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font:1rem/1.55 var(--font);background:var(--bg);color:var(--fg)}
-h1,h2{font-family:var(--head)}
-h1{font-size:clamp(2rem,5vw,2.8rem)}
-h2{font-size:clamp(1.5rem,4vw,2rem)}
-
-/* ▸ header / nav ----------------------------------------------------------- */
-.siteHeader{background:var(--yellow);border-bottom:2px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;position:relative;z-index:20}
-.brand{font-family:var(--head);font-size:clamp(1.3rem,3vw,1.8rem)}
-#mainNav{display:flex;gap:clamp(12px,2vw,24px)}
-#mainNav a{font-family:var(--head);border:1px solid var(--border);padding:.3rem .7rem;color:var(--fg);
-  white-space:nowrap;transition:background .2s}
-#mainNav a:hover{background:var(--fg);color:var(--bg)}
-.menuToggle{display:none;flex-direction:column;gap:3px;border:1px solid var(--border);
-  background:var(--yellow);padding:.35rem .45rem;cursor:pointer}
-.menuToggle span{display:block;width:20px;height:2px;background:var(--border)}
-@media(max-width:700px){
-  #mainNav{position:absolute;top:100%;right:0;background:var(--yellow);flex-direction:column;align-items:flex-start;
-    padding:1rem;border:2px solid var(--border);transform:scaleY(0);transform-origin:top;transition:transform .25s}
-  #mainNav.open{transform:scaleY(1)}
-  #mainNav a{width:100%;border-width:1px 0 0 0;padding:.6rem 0}
-  .menuToggle{display:flex}
-}
-
-/* ▸ hero ------------------------------------------------------------------- */
-.hero{max-width:880px;margin-inline:auto;padding:clamp(40px,10vw,80px) clamp(16px,5vw,40px);text-align:center}
-.cta{margin-top:clamp(24px,5vw,40px);display:flex;flex-direction:column;gap:20px;align-items:center}
-.cta a{border:2px solid var(--border);padding:.6rem 1.4rem;font-family:var(--head);
-  background:var(--yellow);font-size:1.1rem;transition:background .2s}
-.cta a:hover{background:var(--fg);color:var(--bg)}
-
-/* ▸ template grid ---------------------------------------------------------- */
-.templates{max-width:900px;margin:60px auto;padding:0 clamp(16px,4vw,32px)}
-.templateGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px}
-.tpl{position:relative;aspect-ratio:1/1;border:2px solid var(--border);display:flex;
-  align-items:center;justify-content:center;text-align:center;font-family:var(--head);padding:8px;cursor:pointer;
-  user-select:none}
-.tpl:hover{background:var(--yellow)}
-.tpl .desc{position:absolute;inset:0;background:rgba(255,255,255,.92);color:var(--fg);
-  display:flex;align-items:center;justify-content:center;font-size:.8rem;padding:10px;text-align:center;opacity:0;
-  transition:opacity .25s}
-.tpl:hover .desc{opacity:1}
-
-/* ▸ demo modal ------------------------------------------------------------- */
-.demoModal{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
-  background:rgba(0,0,0,.6);backdrop-filter:blur(2px);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
-.demoModal.show{opacity:1;pointer-events:auto}
-.modalInner{background:var(--bg);border:2px solid var(--border);width:90vw;height:90vh;position:relative;display:flex;flex-direction:column}
-.modalInner iframe{flex:1;width:100%;border:0}
-.closeBtn{position:absolute;top:8px;right:8px;font-family:var(--head);border:2px solid var(--border);background:var(--yellow);
-  padding:.3rem .7rem;cursor:pointer}
-.closeBtn:hover{background:var(--fg);color:var(--bg)}
-
-/* ▸ pricing matrix (unchanged) -------------------------------------------- */
-.pricing{max-width:900px;margin:60px auto 100px;padding:0 clamp(16px,4vw,32px)}
-.pricing table{width:100%;border-collapse:collapse}
-.pricing th,.pricing td{border:1px solid var(--border);padding:.8rem;text-align:center;font-size:.95rem}
-.pricing th{background:var(--yellow)}
-.pricing td:first-child{text-align:left;font-weight:600}
-.tick{font-weight:700}
-
-footer{text-align:center;font-size:.8rem;padding:40px 0;color:#555;border-top:1px solid var(--border);font-family:var(--head)}
-</style>
+<!-- global styles -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="siteHeader">
-  <div class="brand"><a href="https://hire.joerice.me/">hire.joerice.me</a></div>
+  <div class="brand"><a href="./">hire.joerice.me</a></div>
   <button class="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   <nav id="mainNav">
-    <a href="https://joerice.me/">Home</a>
-    <a href="https://hire.joerice.me/">Hire&nbsp;Me</a>
-    <a href="https://joerice.me/#about">About&nbsp;Me</a>
-    <a href="https://joerice.me/#contact">Contact&nbsp;Me</a>
-    <a href="https://joerice.me/#quotes">Quotes</a>
-    <a href="https://joerice.me/#links">Useful&nbsp;Links</a>
+    <a href="./">Home</a>
+    <a href="web/">Web&nbsp;Design</a>
+    <a href="it/">IT&nbsp;Services</a>
+    <a href="km/">Knowledge&nbsp;Mgmt</a>
+    <a href="ai/">AI&nbsp;Coaching</a>
+    <a href="https://joerice.me/#contact">Contact</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>Fast, Fixed-Price Websites for Local Businesses</h1>
-  <p>Launch a five-page, mobile-ready site in under seven days—then let me keep it humming for just $200 a year.</p>
-  <div class="cta">
-    <a href="#plans">See Plans</a>
-    <a href="https://joerice.me/#contact">Book a Discovery Call</a>
-  </div>
+<!-- hero content written in Markdown for flexibility -->
+<section class="hero markdown">
+## Pick the Service That Moves the Needle Today
+From instant‑launch websites to rock‑solid networks and AI mastery—tap a card to dive in.
 </section>
 
-<!-- ▸ TEMPLATE DEMOS -->
-<section id="templates" class="templates">
-  <h2>Pick a Starting Style</h2>
+<section class="servicesGrid">
+  <a class="serviceCard" href="web/">
+    <h3>Web Design</h3>
+    <p>Sites live in hours, not weeks. Includes live traffic proof.</p>
+  </a>
 
-  <div class="templateGrid">
-    <div class="tpl" data-demo="demos/1_modern_pro.html">
-      Modern Professional
-      <span class="desc">Clean lines &amp; bold headings—perfect for consultants or clinics.</span>
-    </div>
+  <a class="serviceCard" href="it/">
+    <h3>IT Services</h3>
+    <p>Certified networking &amp; security—from Wi‑Fi tune‑ups to hardening.</p>
+  </a>
 
-    <div class="tpl" data-demo="demos/2_neighborhood_bookstore.html">
-      Neighborhood Bookstore
-      <span class="desc">Warm serif type, shelf-like cards &amp; event listings.</span>
-    </div>
+  <a class="serviceCard" href="km/">
+    <h3>Knowledge&nbsp;Mgmt</h3>
+    <p>Turn scattered docs into living SOPs and learning systems.</p>
+  </a>
 
-    <div class="tpl" data-demo="demos/3_fresh_cafe.html">
-      Fresh Café
-      <span class="desc">Earthy palette, menu tabs &amp; Instagram photo grid.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/4_health_clinic.html">
-      Family Health Clinic
-      <span class="desc">Reassuring blues, appointment CTA &amp; insurance logos.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/5_auto_garage.html">
-      Auto Garage
-      <span class="desc">Dark steel look, service icons &amp; bold price blocks.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/6_creative_studio.html">
-      Creative Studio
-      <span class="desc">Full-bleed hero, masonry portfolio &amp; playful colour pops.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/7_vintage_boutique.html">
-      Vintage Boutique
-      <span class="desc">Muted pastels, typewriter font &amp; look-book slider.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/8_tech_startup.html">
-      Tech Startup (Dark)
-      <span class="desc">Dark-mode, code-style headings &amp; feature grid.</span>
-    </div>
-
-    <div class="tpl" data-demo="demos/9_artist_portfolio.html">
-      Artist Portfolio
-      <span class="desc">Edge-to-edge gallery, hover zoom &amp; bio overlay.</span>
-    </div>
-  </div>
-</section>
-
-<!-- ▸ PRICING MATRIX (unchanged from last version) -->
-<section id="plans" class="pricing">
-  <h2>Compare Your Options</h2>
-  <table>
-    <thead>
-      <tr><th>Deliverable / Feature</th><th>My Rapid Site</th><th>Typical Freelancer*</th><th>DIY Builder</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Build cost (5-page site)</td><td>$1 000 † / $2 000</td><td>$3 000 – $5 000</td><td>$0 upfront</td></tr>
-      <tr><td>Annual hosting / upkeep</td><td>$100 † / $200</td><td>$75 hr+ for changes</td><td>$29 mo plan</td></tr>
-      <tr><td>7-day turnaround</td><td class="tick">✓</td><td>✕ (3–6 wks)</td><td>✓ / self-paced</td></tr>
-      <tr><td>SEO-ready &amp; fast CDN</td><td class="tick">✓</td><td class="tick">✓</td><td>✕</td></tr>
-      <tr><td>Template library choice</td><td class="tick">✓</td><td>✕ (custom only)</td><td class="tick">✓</td></tr>
-      <tr><td>Local point-of-contact (MN)</td><td class="tick">✓</td><td>✕ (remote)</td><td>✕</td></tr>
-      <tr><td>Lifetime founder discount</td><td class="tick">✓</td><td>✕</td><td>✕</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:.75rem;margin-top:.6rem">
-    † Founder pricing—first five clients lock lifetime rate.<br>
-    *Price range based on Upwork/Fiverr mid-tier US freelancers, Jan 2025.
-  </p>
+  <a class="serviceCard" href="ai/">
+    <h3>AI Coaching</h3>
+    <p>ChatGPT &amp; Bard workflows that save hours every week.</p>
+  </a>
 </section>
 
 <footer>&copy; <span id="year"></span> Joe Rice.</footer>
 
-<!-- ▸ DEMO MODAL -->
-<div class="demoModal" id="demoModal">
-  <div class="modalInner">
-    <button class="closeBtn" id="closeDemo">close</button>
-    <iframe id="demoFrame" title="Template demo"></iframe>
-  </div>
-</div>
-
-<script>
-/* year stamp + mobile nav */
-document.getElementById('year').textContent=new Date().getFullYear();
-const menuToggle=document.querySelector('.menuToggle'),
-      mainNav  =document.getElementById('mainNav');
-menuToggle.addEventListener('click',()=>mainNav.classList.toggle('open'));
-
-/* template click-to-preview */
-const modal   =document.getElementById('demoModal'),
-      frame   =document.getElementById('demoFrame'),
-      closeBtn=document.getElementById('closeDemo');
-
-document.querySelectorAll('.tpl').forEach(el=>{
-  el.addEventListener('click',()=>{
-    frame.src=el.dataset.demo;        // e.g. demos/2_neighborhood_bookstore.html
-    modal.classList.add('show');
-  });
-});
-closeBtn.onclick=()=>modal.classList.remove('show');
-modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});
-</script>
+<!-- Markdown parser CDN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- site‑wide logic -->
+<script src="script.js"></script>
 </body>
 </html>

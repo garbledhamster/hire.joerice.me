@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IT Services · Hire Joe Rice</title>
+
+    <!-- brand fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet" />
+
+    <!-- shared stylesheet in repo root -->
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      /* simple gallery grid */
+      .wfGallery {
+        max-width: 900px;
+        margin: 60px auto 40px;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+      }
+      .wfGallery figure {
+        border: 2px dashed var(--border);
+        padding: 16px;
+        text-align: center;
+      }
+      .wfGallery img {
+        max-width: 100%;
+        height: auto;
+      }
+      .wfGallery figcaption {
+        margin-top: 8px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ▸ shared header -->
+    <header class="siteHeader">
+      <div class="brand"><a href="../">hire.joerice.me</a></div>
+      <button class="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <a href="../">Home</a>
+        <a href="../web/">Web&nbsp;Design</a>
+        <a href="../it/">IT&nbsp;Services</a>
+        <a href="../km/">Knowledge&nbsp;Mgmt</a>
+        <a href="../ai/">AI&nbsp;Coaching</a>
+        <a href="https://joerice.me/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ▸ hero -->
+    <section class="hero">
+      <h1>On-Demand IT &amp; Security for Home or Business</h1>
+      <p>
+        Certified networking and security specialist ready to squash
+        bottlenecks, harden systems, and optimise Wi-Fi—on-site or remote.
+      </p>
+      <div class="cta">
+        <a href="#plans" class="jump">See Plans</a>
+        <a href="https://joerice.me/#contact">Book Remote Fix</a>
+      </div>
+    </section>
+
+    <!-- ▸ workflow gallery placeholders -->
+    <section class="wfGallery" aria-label="Workflow Diagrams">
+      <figure>
+        <img
+          src="img/troubleshooting-workflow.png"
+          alt="Troubleshooting workflow diagram placeholder" />
+        <figcaption>
+          Troubleshooting&nbsp;Process<br /><small
+            >(diagram coming&nbsp;soon)</small
+          >
+        </figcaption>
+      </figure>
+      <figure>
+        <img
+          src="img/network-design-workflow.png"
+          alt="Network design workflow diagram placeholder" />
+        <figcaption>
+          Network&nbsp;Design Workflow<br /><small
+            >(diagram coming&nbsp;soon)</small
+          >
+        </figcaption>
+      </figure>
+      <figure>
+        <img
+          src="img/security-hardening-workflow.png"
+          alt="Security hardening workflow diagram placeholder" />
+        <figcaption>
+          Security&nbsp;Hardening Workflow<br /><small
+            >(diagram coming&nbsp;soon)</small
+          >
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ▸ pricing matrix -->
+    <section id="plans" class="pricing">
+      <h2>Rate Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>My&nbsp;Rate</th>
+            <th>Local MSP</th>
+            <th>National Consultancy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hourly remote troubleshooting</td>
+            <td>$125</td>
+            <td>$150&nbsp;–&nbsp;$175</td>
+            <td>$200&nbsp;–&nbsp;$250</td>
+          </tr>
+          <tr>
+            <td>On-site network + Wi-Fi audit (4&nbsp;hrs)</td>
+            <td>$500</td>
+            <td>$700</td>
+            <td>$1&nbsp;000+</td>
+          </tr>
+          <tr>
+            <td>Small-biz security hardening package</td>
+            <td>$1&nbsp;500</td>
+            <td>$2&nbsp;500</td>
+            <td>$4&nbsp;000</td>
+          </tr>
+          <tr>
+            <td>Why choose Joe?</td>
+            <td>
+              Local Twin Cities contact · 10&nbsp;yr infra&nbsp;&amp;&nbsp;sec
+              lead · 48-hr fix guarantee · Founder rate locked
+            </td>
+            <td colspan="2">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ▸ footer -->
+    <footer>&copy; <span id="year"></span> Joe Rice.</footer>
+
+    <script>
+      /* footer year + hamburger menu */
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const burger = document.querySelector(".menuToggle"),
+        nav = document.getElementById("mainNav");
+      if (burger) burger.onclick = () => nav.classList.toggle("open");
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
