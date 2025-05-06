@@ -1,188 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Modern Professional · Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jordan Blake Consulting · Guided Demo</title>
 
-<!-- fonts & icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- fonts & icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-:root{
-  /* palette */
-  --deep:#0d1117;         /* nearly-black */
-  --ink:#1e242b;          /* dark grey for body text */
-  --sky:#0058d6;          /* brand blue */
-  --ice:#f5f7fa;          /* page background */
-  --paper:#ffffff;        /* card background */
-  --border:#e2e6ec;
-  /* type */
-  --body:"Inter",sans-serif;
-  --head:"Playfair Display",serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font:1rem/1.6 var(--body);background:var(--ice);color:var(--ink)}
-h1,h2,h3,h4{font-family:var(--head);font-weight:600;color:var(--deep);letter-spacing:.3px}
-h1{font-size:clamp(2.2rem,6vw,3.5rem)}
-h2{font-size:clamp(1.6rem,4vw,2.4rem)}
-h3{font-size:clamp(1.25rem,3vw,1.5rem)}
-a{color:inherit;text-decoration:none}
-
-/* =============== SIDEBAR NAV ================= */
-#sidebar{position:fixed;inset:0 auto 0 0;width:260px;background:var(--paper);
-  border-right:1px solid var(--border);padding:32px;display:flex;flex-direction:column;gap:24px;z-index:1000;transform:translateX(0);transition:transform .3s}
-#logo{font-family:var(--head);font-size:1.6rem; color:var(--sky)}
-#nav a{display:block;padding:10px 0;font-weight:500;transition:color .2s}
-#nav a:hover{color:var(--sky)}
-.burger{display:none;position:fixed;top:18px;left:18px;width:28px;height:22px;flex-direction:column;justify-content:space-between;cursor:pointer;z-index:1100}
-.burger span{display:block;height:3px;background:var(--deep)}
-@media(max-width:880px){
-  #sidebar{transform:translateX(-100%)}
-  #sidebar.open{transform:translateX(0)}
-  .burger{display:flex}
-}
-
-/* =============== MAIN WRAPPER =============== */
-main{margin-left:260px;overflow:hidden}
-@media(max-width:880px){main{margin-left:0}}
-
-/* =============== HERO ======================= */
-.hero{position:relative;height:84vh;min-height:480px;background:url("https://picsum.photos/seed/boardroom/1600/900") center/cover}
-.hero::before{content:"";position:absolute;inset:0;background:rgba(13,17,23,.65)}
-.heroContent{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 10%}
-.heroContent h1{color:#fff;max-width:16ch}
-.heroContent p{color:#c9d1d9;margin:24px 0 32px;max-width:40ch}
-.cta{display:inline-block;background:var(--sky);color:#fff;padding:.9rem 2rem;border-radius:4px;font-weight:500;transition:background .2s}
-.cta:hover{background:#0041a4}
-
-/* =============== SERVICES =================== */
-section{padding:clamp(72px,12vw,120px) clamp(18px,6vw,80px)}
-.servicesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
-.card{background:var(--paper);border:1px solid var(--border);padding:40px 32px;display:flex;flex-direction:column;gap:18px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-.card i{font-size:2.1rem;color:var(--sky)}
-.card p{font-size:.94rem;color:#5b636d}
-
-/* =============== STATS STRIP ================ */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;background:var(--sky);color:#fff}
-.stat{padding:48px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.15)}
-.stat:last-child{border:0}
-.stat h3{font-size:2rem;color:#fff}
-.stat span{font-size:.9rem}
-
-/* =============== CONTACT ==================== */
-.contact{background:var(--paper);border:1px solid var(--border);max-width:660px;margin-inline:auto;padding:52px 40px}
-.contact form{display:grid;gap:22px}
-.contact input,.contact textarea{width:100%;padding:.75rem .9rem;border:1px solid var(--border);border-radius:3px;font-family:var(--body);font-size:.96rem}
-.contact button{background:var(--sky);color:#fff;padding:.85rem;border:none;border-radius:3px;font-weight:500;cursor:pointer;transition:background .2s}
-.contact button:hover{background:#0041a4}
-
-/* =============== FOOTER ===================== */
-footer{text-align:center;font-size:.8rem;color:#7c868f;padding:72px 0 40px}
-</style>
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="tour.css">
 </head>
 <body>
 
-<!-- Hamburger -->
-<div class="burger" id="burger">
-  <span></span><span></span><span></span>
-</div>
+<!-- burger -->
+<div class="burger" id="burger"><span></span><span></span><span></span></div>
 
-<!-- Sidebar -->
+<!-- sidebar -->
 <aside id="sidebar">
-  <div id="logo">Pro<span style="color:var(--ink)">Consult</span></div>
+  <div id="logo">Jordan<span style="color:var(--ink)">Blake</span></div>
   <nav id="nav">
     <a href="#services">Services</a>
-    <a href="#about">About&nbsp;Us</a>
-    <a href="#stats">Stats</a>
+    <a href="#about">About&nbsp;Me</a>
+    <a href="#stats">Results</a>
     <a href="#contact">Contact</a>
   </nav>
 </aside>
 
 <main>
-
-  <!-- HERO -->
-  <section class="hero">
+  <!-- hero -->
+  <section class="hero" id="hero">
     <div class="heroContent">
-      <h1>Results-Driven Consulting</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper.</p>
+      <h1 id="heroHead">Data-Driven Growth for Small Businesses</h1>
+      <p id="heroSub">I’m Jordan Blake, a fractional COO who turns scattered metrics into clear, profitable action plans.</p>
       <a href="#contact" class="cta">Schedule&nbsp;Call</a>
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- services -->
   <section id="services">
-    <h2 style="text-align:center;margin-bottom:48px">What&nbsp;We&nbsp;Offer</h2>
+    <h2 class="center">Services&nbsp;at&nbsp;a&nbsp;Glance</h2>
     <div class="servicesGrid">
       <div class="card">
         <i class="fa-solid fa-chart-line"></i>
-        <h3>Market Analysis</h3>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum.</p>
+        <h3>Growth Strategy</h3>
+        <p>Find hidden opportunities and target the right customers first.</p>
       </div>
       <div class="card">
         <i class="fa-solid fa-gears"></i>
-        <h3>Process Automation</h3>
-        <p>Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <h3>Workflow Automation</h3>
+        <p>Cut routine tasks in half with no-code + AI tooling.</p>
       </div>
       <div class="card">
-        <i class="fa-solid fa-lightbulb"></i>
-        <h3>Strategy Workshops</h3>
-        <p>Curabitur blandit tempus porttitor. Cras mattis consectetur purus sit amet fermentum.</p>
+        <i class="fa-solid fa-users-gear"></i>
+        <h3>Team Alignment</h3>
+        <p>Unite departments around one 90-day action plan.</p>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- about -->
   <section id="about">
-    <h2 style="text-align:center;margin-bottom:32px">Why&nbsp;Clients&nbsp;Choose&nbsp;Us</h2>
-    <p style="max-width:720px;margin-inline:auto;text-align:center">
-      Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus,
-      nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+    <h2 class="center">About&nbsp;Jordan</h2>
+    <p class="aboutText">
+      After 12&nbsp;years steering operations at two Inc-5000 firms, I help founders translate data into decisions—without the corporate jargon.
     </p>
   </section>
 
-  <!-- STATS -->
+  <!-- stats -->
   <section id="stats" class="stats">
-    <div class="stat">
-      <h3>10+</h3><span>Years Experience</span>
-    </div>
-    <div class="stat">
-      <h3>120</h3><span>Projects Delivered</span>
-    </div>
-    <div class="stat">
-      <h3>98%</h3><span>Client Retention</span>
-    </div>
-    <div class="stat">
-      <h3>5x</h3><span>Average ROI</span>
-    </div>
+    <div class="stat"><h3>12+</h3><span>Years&nbsp;Experience</span></div>
+    <div class="stat"><h3>150</h3><span>Projects&nbsp;Led</span></div>
+    <div class="stat"><h3>96%</h3><span>Repeat&nbsp;Clients</span></div>
+    <div class="stat"><h3>6×</h3><span>Avg&nbsp;Revenue&nbsp;Lift</span></div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- contact -->
   <section id="contact">
     <div class="contact">
-      <h2 style="text-align:center;margin-bottom:32px">Let’s&nbsp;Talk</h2>
+      <h2 class="center">Let’s&nbsp;Talk Growth</h2>
       <form>
-        <input type="text" placeholder="Name (placeholder)" />
-        <input type="email" placeholder="Email (placeholder)" />
-        <textarea rows="5" placeholder="Project details (placeholder)"></textarea>
+        <input type="text"  placeholder="Your Name">
+        <input type="email" placeholder="Email Address">
+        <textarea rows="5"   placeholder="Tell me about your project"></textarea>
         <button type="button">Send&nbsp;Message</button>
       </form>
     </div>
   </section>
 
-  <footer>&copy; <span id="yr"></span> Placeholder&nbsp;Co. · Demo Layout</footer>
+  <!-- map -->
+  <div class="mapWrap">
+    <iframe loading="lazy"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11885147.347!2d-114.0!3d36!2!3m2!1i1024!2i768!4f13.1!5m2!1sen!2sus"></iframe>
+  </div>
+
+  <footer>&copy; <span id="yr"></span> Jordan Blake · Demo Mode</footer>
 </main>
 
-<script>
-document.getElementById('yr').textContent=new Date().getFullYear();
+<!-- tour bar ----------------------------------------------------------->
+<div id="tourBar">
+  <button id="startTour">🧭 <span class="pillLabel">Begin&nbsp;Demo</span></button>
+  <nav id="stepNav">
+    <button data-step="hero">1</button>
+    <button data-step="services">2</button>
+    <button data-step="about">3</button>
+    <button data-step="stats">4</button>
+    <button data-step="contact">5</button>
+  </nav>
+</div>
 
-/* mobile sidebar toggle */
-const burger=document.getElementById('burger');
-const sidebar=document.getElementById('sidebar');
-burger.addEventListener('click',()=>sidebar.classList.toggle('open'));
+<!-- tour tips (fixed in DOM root so they never affect layout) --------->
+<div class="guide" id="tipHero">     <strong>💡 Hero Tips</strong>Promise + support line. Use a relevant banner image.</div>
+<div class="guide" id="tipServices"> <strong>💡 Services Tips</strong>3–6 cards, benefit-focused copy.</div>
+<div class="guide" id="tipAbout">    <strong>💡 About Tips</strong>Short story + proof (years, press, marquee wins).</div>
+<div class="guide" id="tipStats">    <strong>💡 Results Tips</strong>Pick numbers that matter; keep labels clear.</div>
+<div class="guide" id="tipContact">  <strong>💡 Contact Tips</strong>Ask only what you need. Connect this form to your inbox.</div>
+
+<!-- scripts -->
+<script src="tour.js"></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  burger.onclick = () => sidebar.classList.toggle('open');
 </script>
 </body>
 </html>
