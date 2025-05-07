@@ -1,213 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Modern Restaurant · Demo</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Copper Kettle Café · Demo</title>
 
-<!-- fonts & icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- fonts & icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@600&family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<style>
-:root{
-  /* palette */
-  --bg:#ffffff;
-  --ink:#1b1b1b;
-  --accent:#d62828;     /* red highlight */
-  --smoke:#f5f6f7;
-  --border:#e1e2e6;
-  /* type */
-  --sans:"Poppins",sans-serif;
-  --serif:"Playfair Display",serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font:1rem/1.65 var(--sans);color:var(--ink);background:var(--bg)}
-h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:.4px}
-h1{font-size:clamp(2.4rem,5vw,3.6rem)}
-h2{font-size:clamp(1.8rem,4vw,2.6rem)}
-h3{font-size:clamp(1.25rem,3vw,1.55rem)}
-a{color:inherit;text-decoration:none}
+    <style>
+      :root {
+        --bg: #faf7f2;
+        --ink: #262626;
+        --accent: #c96f2b; /* copper */
+        --smoke: #f2f3f5;
+        --border: #e1e2e6;
+        --chalk: #2b2b2b;
+        --sans: "Poppins", sans-serif;
+        --serif: "Playfair Display", serif;
+        --chalkfont: "Gloria Hallelujah", cursive;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font: 1rem/1.65 var(--sans);
+        color: var(--ink);
+        background: var(--bg);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--serif);
+        font-weight: 600;
+        letter-spacing: 0.4px;
+      }
+      h1 {
+        font-size: clamp(2.3rem, 5vw, 3.4rem);
+      }
+      h2 {
+        font-size: clamp(1.7rem, 4vw, 2.4rem);
+      }
+      h3 {
+        font-size: clamp(1.15rem, 3vw, 1.45rem);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-/* ------------- NAV ------------- */
-.nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.9);
-  border-bottom:1px solid var(--border);backdrop-filter:blur(6px);
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 24px;z-index:1000}
-.brand{font-family:var(--serif);font-size:1.8rem;color:var(--accent)}
-.navLinks{display:flex;gap:26px}
-.navLinks a{font-weight:500;position:relative}
-.navLinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width .2s}
-.navLinks a:hover::after{width:100%}
-.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer}
-.burger span{height:3px;background:var(--ink)}
-@media(max-width:860px){
-  .navLinks{position:fixed;inset:60px 0 auto 0;background:var(--bg);
-    flex-direction:column;gap:22px;padding:32px 24px;border-bottom:1px solid var(--border);
-    transform:translateY(-120%);transition:transform .3s}
-  .navLinks.open{transform:translateY(0)}
-  .burger{display:flex}
-}
+      /* NAV */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 24px;
+        z-index: 1000;
+      }
+      .brand {
+        font-family: var(--serif);
+        font-size: 1.9rem;
+        color: var(--accent);
+      }
+      .navLinks {
+        display: flex;
+        gap: 26px;
+      }
+      .navLinks a {
+        font-weight: 500;
+        position: relative;
+      }
+      .navLinks a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.2s;
+      }
+      .navLinks a:hover::after {
+        width: 100%;
+      }
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        width: 28px;
+        cursor: pointer;
+      }
+      .burger span {
+        height: 3px;
+        background: var(--ink);
+      }
+      @media (max-width: 860px) {
+        .navLinks {
+          position: fixed;
+          inset: 60px 0 auto 0;
+          background: var(--bg);
+          flex-direction: column;
+          gap: 22px;
+          padding: 32px 24px;
+          border-bottom: 1px solid var(--border);
+          transform: translateY(-120%);
+          transition: transform 0.3s;
+        }
+        .navLinks.open {
+          transform: translateY(0);
+        }
+        .burger {
+          display: flex;
+        }
+      }
 
-/* ------------- HERO ------------- */
-.hero{margin-top:60px;position:relative;height:88vh;min-height:460px;
-  background:url("https://picsum.photos/seed/restauranthero/1600/900") center/cover}
-.hero::before{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.65) 100%)}
-.heroContent{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:center;align-items:flex-start;padding:0 9%}
-.heroContent h1{color:#fff;max-width:15ch}
-.heroContent p{color:#fafafa;margin:22px 0 32px;max-width:38ch}
-.cta{display:inline-block;background:var(--accent);color:#fff;padding:.85rem 1.8rem;
-  font-weight:500;border-radius:4px;transition:opacity .2s}
-.cta:hover{opacity:.85}
+      /* HERO */
+      .hero {
+        margin-top: 60px;
+        position: relative;
+        height: 86vh;
+        min-height: 460px;
+        background: url("https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+          center/cover;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.35) 0%,
+          rgba(0, 0, 0, 0.65) 100%
+        );
+      }
+      .heroContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 9%;
+      }
+      .heroContent h1 {
+        color: #fff;
+        max-width: 15ch;
+      }
+      .heroContent p {
+        color: #fafafa;
+        margin: 22px 0 32px;
+        max-width: 38ch;
+      }
+      .cta {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.8rem 1.7rem;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: opacity 0.2s;
+      }
+      .cta:hover {
+        opacity: 0.85;
+      }
 
-/* ------------- SECTIONS ------------- */
-section{padding:clamp(80px,10vw,120px) clamp(18px,6vw,72px)}
-.center{max-width:880px;margin-inline:auto;text-align:center}
+      .promo {
+        position: absolute;
+        bottom: -34px;
+        left: 9%;
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+        border-radius: 6px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        transform: rotate(-2deg);
+        z-index: 10;
+      }
+      .promo strong {
+        display: block;
+        font-size: 1.05rem;
+      }
 
-/* MENU CARDS */
-.menuGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:52px}
-.item{background:var(--smoke);border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;gap:6px}
-.item h3{color:var(--accent);font-size:1.1rem}
-.price{font-weight:500}
-.desc{font-size:.9rem;color:#56595f}
+      /* SECTIONS */
+      section {
+        padding: clamp(80px, 10vw, 120px) clamp(18px, 6vw, 72px);
+      }
+      .center {
+        max-width: 880px;
+        margin-inline: auto;
+        text-align: center;
+      }
 
-/* INFO STRIP (hours / location / actions) */
-.infoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:48px}
-.block{background:#fff;border:1px solid var(--border);padding:28px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 3px 8px rgba(0,0,0,.05)}
-.block i{color:var(--accent);font-size:1.7rem}
-.block h3{margin-top:4px}
-.hours p,.block a{font-size:.92rem}
-.orderBtns{display:flex;flex-direction:column;gap:12px;margin-top:8px}
-.orderBtns a{display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent);color:#fff;padding:.7rem 1rem;font-weight:500;border-radius:3px;transition:opacity .2s}
-.orderBtns a:hover{opacity:.85}
+      /* CHALKBOARD MENU */
+      .chalkboard {
+        background: var(--chalk);
+        color: #fff;
+        font-family: var(--chalkfont);
+        border: 4px double #faf7f2;
+        border-radius: 10px;
+        padding: 50px 24px;
+        margin-top: 60px;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+      }
+      .chalkboard h2 {
+        font-family: var(--chalkfont);
+        font-size: 2.4rem;
+        margin-bottom: 26px;
+      }
+      .menuCols {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 38px;
+      }
+      .menuGroup h3 {
+        font-size: 1.5rem;
+        margin-bottom: 14px;
+        text-decoration: underline;
+      }
+      .menuItem {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+      }
+      .dots {
+        flex: 1;
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+        margin: 0 8px;
+      }
 
-/* MAP */
-.mapWrap{margin-top:60px;border:2px solid var(--border)}
-.mapWrap iframe{width:100%;height:380px;display:block}
+      /* FEATURE / BLURB */
+      .featureGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+        gap: 40px;
+      }
+      .featureImg {
+        background: url("https://images.pexels.com/photos/240223/pexels-photo-240223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+          center/cover;
+        height: 340px;
+        border-radius: 8px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+      }
+      .featureText h2 {
+        margin-bottom: 14px;
+      }
 
-/* FOOTER */
-footer{background:var(--ink);color:#e0e0e0;text-align:center;font-size:.84rem;
-  padding:60px 16px}
+      /* TESTIMONIALS */
+      .testWrap {
+        margin-top: 50px;
+      }
+      .quotes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+        margin-top: 30px;
+      }
+      blockquote {
+        background: var(--smoke);
+        border-left: 4px solid var(--accent);
+        padding: 18px 20px;
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+      blockquote cite {
+        display: block;
+        margin-top: 8px;
+        font-style: normal;
+        font-weight: 600;
+        color: var(--accent);
+      }
 
-/* --- mobile tweaks --- */
-@media(max-width:760px){
-  .item{text-align:center}
-  .orderBtns{flex-direction:row}
-  .orderBtns a{flex:1;justify-content:center}
-}
-</style>
-</head>
-<body>
+      /* INFO / HOURS / LOCATION */
+      .infoGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 28px;
+        margin-top: 48px;
+      }
+      .block {
+        background: #fff;
+        border: 1px solid var(--border);
+        padding: 28px 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      }
+      .block i {
+        color: var(--accent);
+        font-size: 1.7rem;
+      }
+      .block h3 {
+        margin-top: 4px;
+      }
+      .orderBtns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .orderBtns a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.7rem 1rem;
+        font-weight: 500;
+        border-radius: 3px;
+        transition: opacity 0.2s;
+      }
+      .orderBtns a:hover {
+        opacity: 0.85;
+      }
+      .hours p,
+      .block a {
+        font-size: 0.92rem;
+      }
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="brand">Plate&nbsp;&middot;&nbsp;Palette</div>
-  <div class="burger" id="burger"><span></span><span></span><span></span></div>
-  <div class="navLinks" id="navLinks">
-    <a href="#menu">Menu</a>
-    <a href="#info">Hours&nbsp;&amp;&nbsp;Location</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+      /* MAP */
+      .mapWrap {
+        margin-top: 60px;
+        border: 2px solid var(--border);
+      }
+      .mapWrap iframe {
+        width: 100%;
+        height: 380px;
+        display: block;
+      }
 
-<!-- HERO -->
-<header class="hero">
-  <div class="heroContent">
-    <h1>Locally Inspired, Seasonally Crafted</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus.</p>
-    <a href="#menu" class="cta">View&nbsp;Menu</a>
-  </div>
-</header>
+      /* FOOTER */
+      footer {
+        background: var(--ink);
+        color: #e0e0e0;
+        text-align: center;
+        font-size: 0.84rem;
+        padding: 60px 16px;
+      }
 
-<!-- MENU SECTION -->
-<section id="menu">
-  <div class="center">
-    <h2>Today's&nbsp;Highlights</h2>
-    <p style="margin-top:10px">Sample selection — swap for real dishes.</p>
-  </div>
-  <div class="menuGrid">
-    <div class="item">
-      <h3>Burrata&nbsp;Salad</h3>
-      <span class="price">$14</span>
-      <p class="desc">Heirloom tomatoes, basil oil, aged balsamic.</p>
-    </div>
-    <div class="item">
-      <h3>Seared&nbsp;Salmon</h3>
-      <span class="price">$24</span>
-      <p class="desc">Farro risotto, charred broccolini, lemon beurre blanc.</p>
-    </div>
-    <div class="item">
-      <h3>Short&nbsp;Rib&nbsp;Pappardelle</h3>
-      <span class="price">$22</span>
-      <p class="desc">Slow-braised beef, red wine reduction, pecorino.</p>
-    </div>
-    <div class="item">
-      <h3>Chocolate&nbsp;Torte</h3>
-      <span class="price">$9</span>
-      <p class="desc">Espresso ganache, sea-salt brittle.</p>
-    </div>
-  </div>
-</section>
-
-<!-- INFO SECTION -->
-<section id="info">
-  <div class="center">
-    <h2>Visit&nbsp;Us</h2>
-  </div>
-  <div class="infoGrid">
-    <!-- hours -->
-    <div class="block hours">
-      <i class="fa-regular fa-clock"></i>
-      <h3>Hours</h3>
-      <p>Mon–Thu&nbsp;·&nbsp;11 AM – 9 PM<br>Fri–Sat&nbsp;·&nbsp;11 AM – 10 PM<br>Sun&nbsp;·&nbsp;Brunch 9 AM – 2 PM</p>
-    </div>
-    <!-- location -->
-    <div class="block">
-      <i class="fa-solid fa-location-dot"></i>
-      <h3>Location</h3>
-      <p>123 Placeholder Ave<br>St&nbsp;Paul, MN&nbsp;55101<br>(555)&nbsp;555-0123</p>
-    </div>
-    <!-- order links -->
-    <div class="block">
-      <i class="fa-solid fa-cart-shopping"></i>
-      <h3>Order&nbsp;Now</h3>
-      <div class="orderBtns">
-        <a href="#"><i class="fa-solid fa-globe"></i>Online&nbsp;Ordering</a>
-        <a href="#"><i class="fa-brands fa-doordash"></i>DoorDash</a>
+      @media (max-width: 760px) {
+        .promo {
+          left: 50%;
+          transform: translateX(-50%) rotate(-2deg);
+        }
+        .orderBtns {
+          flex-direction: row;
+        }
+        .orderBtns a {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="brand">Copper&nbsp;Kettle&nbsp;Café</div>
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
       </div>
-    </div>
-  </div>
+      <div class="navLinks" id="navLinks">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#info">Hours&nbsp;&amp;&nbsp;Location</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-  <!-- MAP -->
-  <div class="mapWrap">
-    <!-- static embed link for demo -->
-    <iframe
-      loading="lazy"
-      title="Google Map placeholder"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000000"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="heroContent">
+        <h1>Small-Batch Roasts &amp; Big-Hearted Hospitality</h1>
+        <p>
+          Sip award-winning single-origin coffees and scratch-made pastries in
+          the heart of Lowertown.
+        </p>
+        <a href="#menu" class="cta">View&nbsp;Menu</a>
+      </div>
+      <div class="promo">
+        <strong>Free Refill Friday</strong>
+        Bottomless drip until 11 AM
+      </div>
+    </header>
 
-<!-- CONTACT / FOOTER -->
-<footer id="contact">
-  <p>&copy; <span id="yr"></span> Plate &middot; Palette — Demo Layout</p>
-</footer>
+    <!-- CHALKBOARD MENU -->
+    <section id="menu" class="chalkboard">
+      <h2>Today’s Chalkboard</h2>
+      <div class="menuCols">
+        <!-- Coffee -->
+        <div class="menuGroup">
+          <h3>Coffee&nbsp;&amp;&nbsp;Espresso</h3>
+          <div class="menuItem">
+            <span>Drip Coffee</span><span class="dots"></span><span>$3.00</span>
+          </div>
+          <div class="menuItem">
+            <span>Cold Brew</span><span class="dots"></span><span>$4.00</span>
+          </div>
+          <div class="menuItem">
+            <span>Cappuccino</span><span class="dots"></span><span>$4.50</span>
+          </div>
+          <div class="menuItem">
+            <span>Latte</span><span class="dots"></span><span>$4.50</span>
+          </div>
+          <div class="menuItem">
+            <span>Mocha</span><span class="dots"></span><span>$5.00</span>
+          </div>
+          <div class="menuItem">
+            <span>Matcha Latte</span><span class="dots"></span
+            ><span>$4.75</span>
+          </div>
+        </div>
 
-<script>
-/* year stamp */
-document.getElementById('yr').textContent=new Date().getFullYear();
+        <!-- Tea -->
+        <div class="menuGroup">
+          <h3>Loose-Leaf Tea</h3>
+          <div class="menuItem">
+            <span>Earl Grey</span><span class="dots"></span><span>$3.00</span>
+          </div>
+          <div class="menuItem">
+            <span>Jasmine Green</span><span class="dots"></span
+            ><span>$3.25</span>
+          </div>
+          <div class="menuItem">
+            <span>Chamomile</span><span class="dots"></span><span>$3.00</span>
+          </div>
+          <div class="menuItem">
+            <span>Masala Chai</span><span class="dots"></span><span>$3.50</span>
+          </div>
+        </div>
 
-/* mobile nav */
-const burger=document.getElementById('burger'),
-      links=document.getElementById('navLinks');
-burger.addEventListener('click',()=>links.classList.toggle('open'));
-</script>
-</body>
+        <!-- Pastries -->
+        <div class="menuGroup">
+          <h3>Bakery Cases</h3>
+          <div class="menuItem">
+            <span>Butter Croissant</span><span class="dots"></span
+            ><span>$3.25</span>
+          </div>
+          <div class="menuItem">
+            <span>Blueberry Muffin</span><span class="dots"></span
+            ><span>$3.50</span>
+          </div>
+          <div class="menuItem">
+            <span>Bagel &amp; Cream Cheese</span><span class="dots"></span
+            ><span>$3.75</span>
+          </div>
+          <div class="menuItem">
+            <span>Avocado Toast</span><span class="dots"></span
+            ><span>$6.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / BLURB -->
+    <section id="about">
+      <div class="featureGrid">
+        <div class="featureImg" aria-hidden="true"></div>
+        <div class="featureText">
+          <h2>Brewing Change Sip by Sip</h2>
+          <p>
+            Our CEO, <strong>Maya Patel</strong>, is on a mission to prove you
+            can run a zero-waste café without sacrificing flavor. From
+            compostable cups to coffee-ground garden giveaways, every detail
+            reflects her passion for sustainable community spaces.
+          </p>
+        </div>
+      </div>
+
+      <!-- testimonials -->
+      <div class="testWrap">
+        <h2 class="center" style="margin-bottom: 6px">
+          What Neighbors Are Saying
+        </h2>
+        <p class="center" style="font-size: 0.95rem">
+          Real comments pulled from our suggestion wall.
+        </p>
+        <div class="quotes">
+          <blockquote>
+            “The Matcha Latte tastes like spring in a cup. Copper Kettle is my
+            morning sanctuary.” <cite>— Jenna R.</cite>
+          </blockquote>
+          <blockquote>
+            “Finally, a café that lets me refill without the side-eye
+            <em>and</em> composts my cup.” <cite>— Luis M.</cite>
+          </blockquote>
+          <blockquote>
+            “Their avocado toast convinced me bread is still worth eating.
+            10/10.” <cite>— Amira K.</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info">
+      <div class="center"><h2>Visit Us</h2></div>
+      <div class="infoGrid">
+        <!-- hours -->
+        <div class="block hours">
+          <i class="fa-regular fa-clock"></i>
+          <h3>Hours</h3>
+          <p>
+            Mon–Fri&nbsp;·&nbsp;6 AM – 6 PM<br />Sat–Sun&nbsp;·&nbsp;7 AM – 4 PM
+          </p>
+        </div>
+        <!-- location -->
+        <div class="block">
+          <i class="fa-solid fa-location-dot"></i>
+          <h3>Location</h3>
+          <p>
+            123 Placeholder Ave<br />St Paul, MN 55101<br />(555)&nbsp;555-0123
+          </p>
+        </div>
+        <!-- order links -->
+        <div class="block">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h3>Order Ahead</h3>
+          <div class="orderBtns">
+            <a href="#"
+              ><i class="fa-solid fa-mobile-screen-button"></i>Mobile Pickup</a
+            >
+            <a href="#"><i class="fa-brands fa-doordash"></i>DoorDash</a>
+          </div>
+        </div>
+        <!-- perk -->
+        <div class="block">
+          <i class="fa-solid fa-seedling"></i>
+          <h3>Grounds for Gardens</h3>
+          <p>
+            Bring a container on Sundays and grab free spent coffee grounds for
+            your plants.
+          </p>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="mapWrap">
+        <iframe
+          loading="lazy"
+          title="Google Map placeholder"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000000"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+      <p>
+        &copy; <span id="yr"></span> Copper Kettle Café · Demo Layout — brewed
+        with love &amp; JavaScript.
+      </p>
+    </footer>
+
+    <script>
+      /* year stamp */
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      /* mobile nav */
+      const burger = document.getElementById("burger"),
+        links = document.getElementById("navLinks");
+      burger.addEventListener("click", () => links.classList.toggle("open"));
+    </script>
+  </body>
 </html>

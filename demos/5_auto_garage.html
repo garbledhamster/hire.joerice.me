@@ -1,219 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Steel City Auto · Demo</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Steel City Auto · Demo</title>
 
-<!-- fonts & icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Condensed:wght@700&display=swap"
-  rel="stylesheet">
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- fonts & icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Condensed:wght@700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<style>
-:root{
-  /* colors */
-  --charcoal:#1f2428;
-  --smoke:#f3f4f6;
-  --steel:#2e353b;
-  --accent:#ff6f00;          /* safety orange */
-  --border:#3d4349;
-  /* type */
-  --sans:"Roboto",sans-serif;
-  --cond:"Roboto Condensed",sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font:1rem/1.6 var(--sans);color:#e6e8ea;background:var(--charcoal)}
-h1,h2,h3{font-family:var(--cond);letter-spacing:.6px;color:#fff}
-h1{font-size:clamp(2.3rem,5vw,3.4rem)}
-h2{font-size:clamp(1.9rem,4vw,2.6rem)}
-h3{font-size:clamp(1.3rem,3vw,1.6rem)}
-a{color:inherit;text-decoration:none}
-img{display:block;width:100%;height:auto;border:2px solid var(--border)}
+    <style>
+      :root {
+        /* colors */
+        --charcoal: #1f2428;
+        --smoke: #f3f4f6;
+        --steel: #2e353b;
+        --accent: #ff6f00; /* safety orange */
+        --border: #3d4349;
+        /* type */
+        --sans: "Roboto", sans-serif;
+        --cond: "Roboto Condensed", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font: 1rem/1.6 var(--sans);
+        color: #e6e8ea;
+        background: var(--charcoal);
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--cond);
+        letter-spacing: 0.6px;
+        color: #fff;
+      }
+      h1 {
+        font-size: clamp(2.3rem, 5vw, 3.4rem);
+      }
+      h2 {
+        font-size: clamp(1.9rem, 4vw, 2.6rem);
+      }
+      h3 {
+        font-size: clamp(1.3rem, 3vw, 1.6rem);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
 
-/* ---------- NAV ---------- */
-.nav{position:fixed;top:0;left:0;right:0;background:rgba(31,36,40,.92);
-  border-bottom:1px solid var(--border);backdrop-filter:blur(6px);
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 22px;z-index:1000}
-.brand{font-family:var(--cond);font-size:1.8rem;color:var(--accent)}
-.navLinks{display:flex;gap:28px}
-.navLinks a{font-weight:500;position:relative}
-.navLinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width .2s}
-.navLinks a:hover::after{width:100%}
-.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer}
-.burger span{height:3px;background:#fff}
-@media(max-width:860px){
-  .navLinks{position:fixed;inset:60px 0 auto 0;background:var(--steel);
-    flex-direction:column;gap:22px;padding:32px 24px;border-bottom:1px solid var(--border);
-    transform:translateY(-120%);transition:transform .3s}
-  .navLinks.open{transform:translateY(0)}
-  .burger{display:flex}
-}
+      /* ---------- ANIMATIONS ---------- */
+      @keyframes fadeSlide {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes bob {
+        /* sticker gentle float */
+        0% {
+          transform: rotate(-8deg) translateY(-2px);
+        }
+        100% {
+          transform: rotate(-8deg) translateY(4px);
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(1turn);
+        }
+      }
 
-/* ---------- HERO ---------- */
-.hero{margin-top:60px;position:relative;height:84vh;min-height:460px;
-  background:url("https://picsum.photos/seed/garageHero/1600/900") center/cover}
-.hero::before{content:"";position:absolute;inset:0;background:rgba(31,36,40,.6)}
-.heroContent{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 9%}
-.heroContent h1{color:#fff;max-width:14ch}
-.heroContent p{color:#d0d2d4;margin:22px 0 32px;max-width:40ch}
-.cta{display:inline-block;background:var(--accent);color:#fff;padding:.9rem 2rem;font-weight:600;border-radius:3px;transition:opacity .2s}
-.cta:hover{opacity:.85}
+      /* ---------- NAV ---------- */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(31, 36, 40, 0.92);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 22px;
+        z-index: 1000;
+      }
+      .brand {
+        font-family: var(--cond);
+        font-size: 1.8rem;
+        color: var(--accent);
+      }
+      .navLinks {
+        display: flex;
+        gap: 28px;
+      }
+      .navLinks a {
+        font-weight: 500;
+        position: relative;
+      }
+      .navLinks a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.2s;
+      }
+      .navLinks a:hover::after {
+        width: 100%;
+      }
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        width: 28px;
+        cursor: pointer;
+      }
+      .burger span {
+        height: 3px;
+        background: #fff;
+      }
+      @media (max-width: 860px) {
+        .navLinks {
+          position: fixed;
+          inset: 60px 0 auto 0;
+          background: var(--steel);
+          flex-direction: column;
+          gap: 22px;
+          padding: 32px 24px;
+          border-bottom: 1px solid var(--border);
+          transform: translateY(-120%);
+          transition: transform 0.3s;
+        }
+        .navLinks.open {
+          transform: translateY(0);
+        }
+        .burger {
+          display: flex;
+        }
+      }
 
-/* ---------- SECTION WRAPPER ---------- */
-section{padding:clamp(80px,10vw,120px) clamp(18px,6vw,72px)}
-.center{max-width:880px;margin-inline:auto;text-align:center}
+      /* ---------- HERO ---------- */
+      .hero {
+        margin-top: 60px;
+        position: relative;
+        height: 84vh;
+        min-height: 460px;
+        background: url("https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1600")
+          center/cover;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 36, 40, 0.55);
+      }
+      /* spinning gear watermark */
+      .hero::after {
+        content: "\f085";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        font-size: 4.8rem;
+        opacity: 0.08;
+        color: #fff;
+        animation: spin 18s linear infinite;
+        pointer-events: none;
+      }
+      .heroContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 9%;
+        animation: fadeSlide 1s ease 0.2s both;
+      }
+      .heroContent h1 {
+        color: #fff;
+        max-width: 14ch;
+      }
+      .heroContent p {
+        color: #d0d2d4;
+        margin: 22px 0 32px;
+        max-width: 40ch;
+      }
+      .cta {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.9rem 2rem;
+        font-weight: 600;
+        border-radius: 3px;
+        transition: opacity 0.2s;
+      }
+      .cta:hover {
+        opacity: 0.85;
+      }
 
-/* SERVICE CARDS */
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;margin-top:52px}
-.card{background:var(--steel);border:1px solid var(--border);padding:30px 24px;display:flex;flex-direction:column;gap:14px;text-align:center}
-.card i{font-size:2rem;color:var(--accent)}
-.price{font-weight:700;font-size:1.3rem;color:#fff}
-.desc{font-size:.9rem;color:#c3c6c9}
+      /* ---------- SECTION WRAPPER ---------- */
+      section {
+        padding: clamp(80px, 10vw, 120px) clamp(18px, 6vw, 72px);
+      }
+      .center {
+        max-width: 880px;
+        margin-inline: auto;
+        text-align: center;
+      }
 
-/* INFO GRID */
-.infoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:50px}
-.block{background:var(--steel);border:1px solid var(--border);padding:30px 28px;display:flex;flex-direction:column;gap:14px}
-.block i{color:var(--accent);font-size:1.6rem}
-.block h3{color:#fff}
-.block p,.block a{font-size:.9rem;color:#d3d5d7}
+      /* ---------- STICKERS ---------- */
+      .sticker {
+        position: absolute;
+        top: 12px;
+        left: -12px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.63rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 4px 10px;
+        border-radius: 3px;
+        transform: rotate(-8deg);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+        animation: bob 3.4s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
 
-/* ACTION BUTTONS */
-.btns{display:flex;flex-direction:column;gap:14px;margin-top:12px}
-.btns a{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:.75rem 1rem;font-weight:600;border-radius:3px;transition:opacity .2s}
-.btns a:hover{opacity:.85}
-@media(max-width:600px){.btns{flex-direction:row;flex-wrap:wrap}.btns a{flex:1;justify-content:center}}
+      /* SERVICE CARDS */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 28px;
+        margin-top: 52px;
+      }
+      .card {
+        background: var(--steel);
+        border: 1px solid var(--border);
+        padding: 0 0 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+        position: relative;
+        transition: transform 0.25s, box-shadow 0.25s;
+      }
+      .card .top {
+        height: 140px;
+        overflow: hidden;
+      }
+      .card .top i {
+        font-size: 2.6rem;
+        color: var(--accent);
+        line-height: 140px;
+      }
+      .card .top img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.5);
+      }
+      .price {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #fff;
+      }
+      .desc {
+        font-size: 0.9rem;
+        color: #c3c6c9;
+      }
 
-/* MAP */
-.mapWrap{margin-top:60px;border:2px solid var(--border)}
-.mapWrap iframe{width:100%;height:380px;display:block}
+      /* INFO GRID */
+      .infoGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+        margin-top: 50px;
+      }
+      .block {
+        background: var(--steel);
+        border: 1px solid var(--border);
+        padding: 30px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+      .block i {
+        color: var(--accent);
+        font-size: 1.6rem;
+      }
+      .block h3 {
+        color: #fff;
+      }
+      .block p,
+      .block a {
+        font-size: 0.9rem;
+        color: #d3d5d7;
+      }
+      .block:hover::after {
+        transform: translateX(120%);
+      }
+      .block::after {
+        content: "";
+        position: absolute;
+        left: -160px;
+        top: 0;
+        height: 100%;
+        width: 160px;
+        background: rgba(255, 255, 255, 0.03);
+        transform: translateX(0) skewX(-20deg);
+        transition: transform 0.5s ease;
+      }
 
-/* FOOTER */
-footer{text-align:center;font-size:.82rem;color:#9ea2a6;padding:60px 16px;border-top:1px solid var(--border)}
-</style>
-</head>
-<body>
+      /* ACTION BUTTONS */
+      .btns {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 12px;
+      }
+      .btns a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border-radius: 3px;
+        transition: opacity 0.2s;
+      }
+      .btns a:hover {
+        opacity: 0.85;
+      }
+      @media (max-width: 600px) {
+        .btns {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .btns a {
+          flex: 1;
+          justify-content: center;
+        }
+      }
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="brand">Steel&nbsp;City&nbsp;Auto</div>
-  <div class="burger" id="burger"><span></span><span></span><span></span></div>
-  <div class="navLinks" id="navLinks">
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#info">Hours&nbsp;&amp;&nbsp;Location</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+      /* ---------- GALLERY ---------- */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 46px;
+      }
+      .gallery figure {
+        position: relative;
+        border: 2px solid var(--border);
+        overflow: hidden;
+        transform-origin: center;
+        transition: transform 0.25s;
+      }
+      .gallery figcaption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.55);
+        color: #fff;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+      .gallery figure:hover {
+        transform: scale(1.04);
+      }
 
-<!-- HERO -->
-<header class="hero">
-  <div class="heroContent">
-    <h1>Repairs Done Right.<br>Back on&nbsp;the&nbsp;Road Fast.</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus.</p>
-    <a href="#info" class="cta">Book&nbsp;Service</a>
-  </div>
-</header>
+      /* MAP */
+      .mapWrap {
+        margin-top: 60px;
+        border: 2px solid var(--border);
+      }
+      .mapWrap iframe {
+        width: 100%;
+        height: 380px;
+        display: block;
+      }
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="center">
-    <h2>Popular&nbsp;Services</h2>
-  </div>
-  <div class="services">
-    <div class="card">
-      <i class="fa-solid fa-oil-can"></i>
-      <h3>Oil&nbsp;Change</h3>
-      <span class="price">$39</span>
-      <p class="desc">Synthetic blend, 15-point inspection.</p>
-    </div>
-    <div class="card">
-      <i class="fa-solid fa-car-battery"></i>
-      <h3>Battery&nbsp;Replace</h3>
-      <span class="price">$129</span>
-      <p class="desc">Premium battery + install + disposal.</p>
-    </div>
-    <div class="card">
-      <i class="fa-solid fa-brake-warning"></i>
-      <h3>Brake&nbsp;Service</h3>
-      <span class="price">From&nbsp;$249</span>
-      <p class="desc">Pads, rotors &amp; safety check.</p>
-    </div>
-    <div class="card">
-      <i class="fa-solid fa-wrench"></i>
-      <h3>Tune-Up</h3>
-      <span class="price">$189</span>
-      <p class="desc">Spark plugs, filters, drive-belt test.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="center">
-    <h2>Why&nbsp;Choose&nbsp;Us</h2>
-    <p style="margin-top:12px;color:#cfd2d4">Family-owned since 1998 · ASE-Certified · Warranty on every repair.</p>
-  </div>
-</section>
-
-<!-- INFO SECTION -->
-<section id="info">
-  <div class="center">
-    <h2>Hours&nbsp;&amp;&nbsp;Location</h2>
-  </div>
-  <div class="infoGrid">
-    <!-- hours -->
-    <div class="block">
-      <i class="fa-regular fa-clock"></i>
-      <h3>Shop&nbsp;Hours</h3>
-      <p>Mon–Fri&nbsp;·&nbsp;7 AM – 6 PM<br>Sat&nbsp;·&nbsp;8 AM – 2 PM<br>Sun&nbsp;·&nbsp;Closed</p>
-    </div>
-    <!-- contact -->
-    <div class="block">
-      <i class="fa-solid fa-phone"></i>
-      <h3>Call&nbsp;Us</h3>
-      <p>(555)&nbsp;555-0150<br>service@steelcityauto.demo</p>
-    </div>
-    <!-- actions -->
-    <div class="block">
-      <i class="fa-solid fa-calendar-check"></i>
-      <h3>Book&nbsp;Online</h3>
-      <div class="btns">
-        <a href="#"><i class="fa-solid fa-globe"></i>Schedule&nbsp;Service</a>
-        <a href="#"><i class="fa-solid fa-dollar-sign"></i>Get&nbsp;Estimate</a>
+      /* FOOTER */
+      footer {
+        text-align: center;
+        font-size: 0.82rem;
+        color: #9ea2a6;
+        padding: 60px 16px;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="brand">Steel&nbsp;City&nbsp;Auto</div>
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
       </div>
-    </div>
-  </div>
+      <div class="navLinks" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#info">Hours&nbsp;&amp;&nbsp;Location</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-  <!-- MAP -->
-  <div class="mapWrap">
-    <iframe
-      loading="lazy"
-      title="Google Map placeholder"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000002"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="heroContent">
+        <h1>Repairs Done Right.<br />Back&nbsp;on&nbsp;the&nbsp;Road Fast.</h1>
+        <p>
+          Honest service • Fair prices • Certified techs who live and breathe
+          horsepower.
+        </p>
+        <a href="#info" class="cta">Book&nbsp;Service</a>
+      </div>
+    </header>
 
-<!-- FOOTER -->
-<footer id="contact">
-  <p>&copy; <span id="yr"></span> Steel&nbsp;City&nbsp;Auto — Demo Layout</p>
-</footer>
+    <!-- …(everything above remains unchanged)… -->
 
-<script>
-/* year stamp */
-document.getElementById('yr').textContent=new Date().getFullYear();
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="center">
+        <h2>Popular&nbsp;Services&nbsp;&amp;&nbsp;Pricing</h2>
+      </div>
+      <div class="services">
+        <div class="card">
+          <span class="sticker">Fast&nbsp;15</span>
+          <div class="top"><i class="fa-solid fa-oil-can"></i></div>
+          <h3>Oil&nbsp;Change</h3>
+          <span class="price">$39</span>
+          <p class="desc">Synthetic blend, 15-point inspection.</p>
+        </div>
 
-/* mobile nav toggle */
-const burger=document.getElementById('burger'),
-      links=document.getElementById('navLinks');
-burger.addEventListener('click',()=>links.classList.toggle('open'));
-</script>
-</body>
+        <div class="card">
+          <div class="top"><i class="fa-solid fa-car-battery"></i></div>
+          <h3>Battery&nbsp;Replace</h3>
+          <span class="price">$129</span>
+          <p class="desc">Premium battery, install &amp; disposal.</p>
+        </div>
+
+        <div class="card">
+          <span class="sticker">Most&nbsp;Booked</span>
+          <div class="top"><i class="fa-solid fa-record-vinyl"></i></div>
+          <h3>Brake&nbsp;Service</h3>
+          <span class="price">From&nbsp;$249</span>
+          <p class="desc">Pads, rotors &amp; safety check.</p>
+        </div>
+
+        <div class="card">
+          <div class="top"><i class="fa-solid fa-wrench"></i></div>
+          <h3>Tune-Up</h3>
+          <span class="price">$189</span>
+          <p class="desc">Spark plugs, filters, belt test.</p>
+        </div>
+
+        <!-- swapped photo → icon -->
+        <div class="card">
+          <div class="top"><i class="fa-solid fa-gauge-high"></i></div>
+          <h3>Tire&nbsp;Pressure&nbsp;&amp;&nbsp;Rotation</h3>
+          <span class="price">$59</span>
+          <p class="desc">Rotation, PSI adjust &amp; tread check.</p>
+        </div>
+
+        <!-- swapped photo → icon -->
+        <div class="card">
+          <span class="sticker">New!</span>
+          <div class="top"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+          <h3>Wash&nbsp;&amp;&nbsp;Interior&nbsp;Clean</h3>
+          <span class="price">$49</span>
+          <p class="desc">Foam wash, vacuum, windows &amp; shine.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- …(everything below remains unchanged)… -->
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="center">
+        <h2>Shop&nbsp;Gallery</h2>
+        <p style="margin-top: 12px; color: #cfd2d4">
+          A quick look at our space, gear and team in action.
+        </p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img
+            src="https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1260"
+            alt="Service bays inside Steel City Auto" />
+          <figcaption>State-of-the-art service bays.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="https://images.pexels.com/photos/3807450/pexels-photo-3807450.jpeg?auto=compress&cs=tinysrgb&w=1260"
+            alt="Technician checking tire pressure" />
+          <figcaption>We check every PSI so you don’t have to.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="https://images.pexels.com/photos/6873082/pexels-photo-6873082.jpeg?auto=compress&cs=tinysrgb&w=1260"
+            alt="Detailing and interior clean" />
+          <figcaption>Freshly detailed &amp; ready to roll.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="https://images.pexels.com/photos/4489744/pexels-photo-4489744.jpeg?auto=compress&cs=tinysrgb&w=1260"
+            alt="Technician diagnosing engine" />
+          <figcaption>Computer diagnostics on every job.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="center">
+        <h2>Why&nbsp;Choose&nbsp;Us</h2>
+        <p style="margin-top: 12px; color: #cfd2d4">
+          Family-owned since&nbsp;1998 · ASE-Certified · 24-month / 24 000-mile
+          warranty on every repair.
+        </p>
+      </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info">
+      <div class="center">
+        <h2>Hours&nbsp;&amp;&nbsp;Location</h2>
+      </div>
+      <div class="infoGrid">
+        <!-- hours -->
+        <div class="block">
+          <i class="fa-regular fa-clock"></i>
+          <h3>Shop&nbsp;Hours</h3>
+          <p>
+            Mon–Fri&nbsp;·&nbsp;7 AM – 6 PM<br />Sat&nbsp;·&nbsp;8 AM – 2 PM<br />Sun&nbsp;·&nbsp;Closed
+          </p>
+        </div>
+        <!-- contact -->
+        <div class="block">
+          <i class="fa-solid fa-phone"></i>
+          <h3>Call&nbsp;Us</h3>
+          <p>(555)&nbsp;555-0150<br />service@steelcityauto.demo</p>
+        </div>
+        <!-- actions -->
+        <div class="block">
+          <i class="fa-solid fa-calendar-check"></i>
+          <h3>Book&nbsp;Online</h3>
+          <div class="btns">
+            <a href="#"
+              ><i class="fa-solid fa-globe"></i>Schedule&nbsp;Service</a
+            >
+            <a href="#"
+              ><i class="fa-solid fa-dollar-sign"></i>Get&nbsp;Estimate</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="mapWrap">
+        <iframe
+          loading="lazy"
+          title="Google Map placeholder"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000002"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+      <p>
+        &copy; <span id="yr"></span> Steel&nbsp;City&nbsp;Auto — Demo Layout
+      </p>
+    </footer>
+
+    <script>
+      /* year stamp */
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      /* mobile nav toggle */
+      const burger = document.getElementById("burger"),
+        links = document.getElementById("navLinks");
+      burger.addEventListener("click", () => links.classList.toggle("open"));
+    </script>
+  </body>
 </html>

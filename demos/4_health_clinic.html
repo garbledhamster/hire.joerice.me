@@ -1,256 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Family Health Clinic · Demo</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Riverbend Community Health · Demo</title>
 
-<!-- fonts & icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- fonts & icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Merriweather:wght@700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<style>
-:root{
-  /* palette */
-  --bg:#ffffff;
-  --ink:#222831;
-  --primary:#0077b6;     /* teal-blue */
-  --accent:#89c2d9;      /* light-blue */
-  --surface:#f7f9fc;
-  --border:#e1e5ea;
-  /* type */
-  --sans:"Nunito",sans-serif;
-  --serif:"Merriweather",serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font:1rem/1.7 var(--sans);color:var(--ink);background:var(--bg)}
-h1,h2,h3{font-family:var(--serif);font-weight:700;color:var(--primary);letter-spacing:.3px}
-h1{font-size:clamp(2.4rem,5vw,3.6rem)}
-h2{font-size:clamp(1.9rem,4vw,2.6rem)}
-h3{font-size:clamp(1.25rem,3vw,1.55rem)}
-a{color:inherit;text-decoration:none}
+    <style>
+      :root {
+        /* palette */
+        --bg: #ffffff;
+        --ink: #21262e;
+        --primary: #0084b4; /* fresh blue */
+        --accent: #9adceb; /* soft cyan */
+        --surface: #f7f9fc;
+        --border: #e1e5ea;
+        --grad: linear-gradient(135deg, #00a6d6 0%, #47c4c9 100%);
+        /* type */
+        --sans: "Nunito", sans-serif;
+        --serif: "Merriweather", serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font: 1rem/1.7 var(--sans);
+        color: var(--ink);
+        background: var(--bg);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--serif);
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        color: var(--primary);
+      }
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 3.7rem);
+      }
+      h2 {
+        font-size: clamp(1.9rem, 4vw, 2.7rem);
+      }
+      h3 {
+        font-size: clamp(1.25rem, 3vw, 1.6rem);
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
 
-/* ---------- NAV ---------- */
-.nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.92);
-  border-bottom:1px solid var(--border);backdrop-filter:blur(6px);
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 24px;z-index:1000}
-.brand{font-family:var(--serif);font-size:1.8rem;color:var(--primary)}
-.navLinks{display:flex;gap:28px}
-.navLinks a{font-weight:600;position:relative}
-.navLinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--primary);transition:width .2s}
-.navLinks a:hover::after{width:100%}
-.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer}
-.burger span{height:3px;background:var(--ink)}
-@media(max-width:860px){
-  .navLinks{position:fixed;inset:60px 0 auto 0;background:var(--bg);
-    flex-direction:column;gap:22px;padding:32px 24px;border-bottom:1px solid var(--border);
-    transform:translateY(-120%);transition:transform .3s}
-  .navLinks.open{transform:translateY(0)}
-  .burger{display:flex}
-}
+      /* ---------- NAV ---------- */
+      .nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 24px;
+        z-index: 1000;
+      }
+      .brand {
+        font-family: var(--serif);
+        font-size: 1.8rem;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      .navLinks {
+        display: flex;
+        gap: 28px;
+      }
+      .navLinks a {
+        font-weight: 600;
+        position: relative;
+      }
+      .navLinks a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.2s;
+      }
+      .navLinks a:hover::after {
+        width: 100%;
+      }
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        width: 28px;
+        cursor: pointer;
+      }
+      .burger span {
+        height: 3px;
+        background: var(--ink);
+      }
+      @media (max-width: 860px) {
+        .navLinks {
+          position: fixed;
+          inset: 60px 0 auto 0;
+          background: var(--bg);
+          flex-direction: column;
+          gap: 22px;
+          padding: 32px 24px;
+          border-bottom: 1px solid var(--border);
+          transform: translateY(-120%);
+          transition: transform 0.3s;
+        }
+        .navLinks.open {
+          transform: translateY(0);
+        }
+        .burger {
+          display: flex;
+        }
+      }
 
-/* ---------- HERO ---------- */
-.hero{margin-top:60px;position:relative;height:84vh;min-height:460px;
-  background:url("https://picsum.photos/seed/clinicHero/1600/900") center/cover}
-.hero::before{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,119,182,.35) 0%,rgba(0,0,0,.55) 100%)}
-.heroContent{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:center;align-items:flex-start;padding:0 9%}
-.heroContent h1{color:#fff;max-width:13ch}
-.heroContent p{color:#eaf6ff;margin:22px 0 32px;max-width:38ch}
-.cta{display:inline-block;background:var(--primary);color:#fff;padding:.85rem 1.9rem;
-  font-weight:600;border-radius:4px;transition:opacity .2s}
-.cta:hover{opacity:.85}
+      /* ---------- HERO ---------- */
+      .hero {
+        margin-top: 60px;
+        position: relative;
+        height: 84vh;
+        min-height: 460px;
+        background: url("https://images.pexels.com/photos/8460040/pexels-photo-8460040.jpeg?auto=compress&cs=tinysrgb&w=1600")
+          center/cover;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+      }
+      .heroContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 9%;
+      }
+      .heroContent h1 {
+        color: #fff;
+        max-width: 14ch;
+      }
+      .heroContent p {
+        color: #eaf6ff;
+        margin: 22px 0 34px;
+        max-width: 42ch;
+      }
+      .cta {
+        display: inline-block;
+        background: var(--grad);
+        color: #fff;
+        padding: 0.9rem 2.1rem;
+        font-weight: 600;
+        border-radius: 4px;
+        transition: opacity 0.2s;
+      }
+      .cta:hover {
+        opacity: 0.85;
+      }
 
-/* ---------- SECTIONS ---------- */
-section{padding:clamp(80px,10vw,120px) clamp(18px,6vw,72px)}
-.center{max-width:900px;margin-inline:auto;text-align:center}
+      /* ---------- SECTIONS ---------- */
+      section {
+        padding: clamp(80px, 10vw, 120px) clamp(18px, 6vw, 72px);
+      }
+      .center {
+        max-width: 900px;
+        margin-inline: auto;
+        text-align: center;
+      }
 
-/* SERVICES GRID */
-.servicesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:52px}
-.service{background:var(--surface);border:1px solid var(--border);padding:30px 26px;
-  display:flex;flex-direction:column;gap:16px;text-align:center;}
-.service i{font-size:2rem;color:var(--primary)}
-.service p{font-size:.9rem;color:#4e5a66}
+      /* SERVICES GRID */
+      .servicesGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 32px;
+        margin-top: 52px;
+      }
+      .service {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 30px 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+      .service i {
+        font-size: 2rem;
+        color: var(--primary);
+      }
+      .service p {
+        font-size: 0.9rem;
+        color: #4e5a66;
+      }
 
-/* PROVIDERS */
-.docGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin-top:48px}
-.docCard{background:#fff;border:1px solid var(--border);padding:28px;display:flex;flex-direction:column;gap:14px;align-items:center;box-shadow:0 3px 8px rgba(0,0,0,.05)}
-.docCard img{width:96px;height:96px;border-radius:50%;border:2px solid var(--accent);object-fit:cover}
-.docCard span{font-weight:700;color:var(--primary)}
-.docCard p{font-size:.9rem;color:#54606c;text-align:center}
+      /* ABOUT CEO */
+      .aboutWrap {
+        display: flex;
+        gap: 48px;
+        flex-wrap: wrap;
+        margin-top: 54px;
+      }
+      .aboutWrap img {
+        flex: 0 0 320px;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+      }
+      .aboutText {
+        flex: 1 1 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .aboutText p {
+        color: #444;
+        line-height: 1.8;
+      }
 
-/* INFO STRIP */
-.infoGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:50px}
-.block{background:#fff;border:1px solid var(--border);padding:30px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 3px 8px rgba(0,0,0,.05)}
-.block h3{color:var(--primary)}
-.block i{color:var(--primary);font-size:1.6rem}
-.hours p,.block a{font-size:.92rem}
+      /* PROVIDERS */
+      .docGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 32px;
+        margin-top: 48px;
+      }
+      .docCard {
+        background: #fff;
+        border: 1px solid var(--border);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      }
+      .docCard img {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        object-fit: cover;
+      }
+      .docCard span {
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .docCard p {
+        font-size: 0.9rem;
+        color: #54606c;
+        text-align: center;
+      }
 
-/* PORTAL BUTTONS */
-.portalBtns{display:flex;flex-direction:column;gap:12px;margin-top:8px}
-.portalBtns a{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:.7rem 1rem;font-weight:600;border-radius:3px;transition:opacity .2s}
-.portalBtns a:hover{opacity:.85}
+      /* INFO STRIP */
+      .infoGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 28px;
+        margin-top: 50px;
+      }
+      .block {
+        background: #fff;
+        border: 1px solid var(--border);
+        padding: 30px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      }
+      .block h3 {
+        color: var(--primary);
+      }
+      .block i {
+        color: var(--primary);
+        font-size: 1.6rem;
+      }
+      .block p,
+      .block a {
+        font-size: 0.92rem;
+      }
+      .portalBtns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .portalBtns a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--grad);
+        color: #fff;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border-radius: 3px;
+        transition: opacity 0.2s;
+      }
+      .portalBtns a:hover {
+        opacity: 0.85;
+      }
+      @media (max-width: 760px) {
+        .portalBtns {
+          flex-direction: row;
+        }
+        .portalBtns a {
+          flex: 1;
+          justify-content: center;
+        }
+      }
 
-/* INSURANCE LOGOS */
-.insureWrap{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;margin-top:42px}
-.insureWrap img{height:32px;filter:grayscale(1);opacity:.7}
+      /* INSURANCE */
+      .insureWrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        justify-content: center;
+        margin-top: 42px;
+      }
+      .insureWrap img {
+        height: 32px;
+        filter: grayscale(1);
+        opacity: 0.7;
+      }
 
-/* MAP */
-.mapWrap{margin-top:60px;border:2px solid var(--border)}
-.mapWrap iframe{width:100%;height:380px;display:block}
+      /* TESTIMONIALS */
+      .testGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+        margin-top: 56px;
+      }
+      .quote {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 28px;
+        font-size: 0.95rem;
+        position: relative;
+        line-height: 1.6;
+      }
+      .quote::before {
+        content: "“";
+        font-family: var(--serif);
+        font-size: 3rem;
+        color: var(--accent);
+        position: absolute;
+        top: -20px;
+        left: 16px;
+      }
 
-/* FOOTER */
-footer{background:var(--ink);color:#e6e9ec;text-align:center;font-size:.84rem;padding:60px 16px}
+      /* MAP */
+      .mapWrap {
+        margin-top: 60px;
+        border: 2px solid var(--border);
+      }
+      .mapWrap iframe {
+        width: 100%;
+        height: 380px;
+        display: block;
+      }
 
-/* MOBILE */
-@media(max-width:760px){
-  .portalBtns{flex-direction:row}
-  .portalBtns a{flex:1;justify-content:center}
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="brand">Riverbend&nbsp;Clinic</div>
-  <div class="burger" id="burger"><span></span><span></span><span></span></div>
-  <div class="navLinks" id="navLinks">
-    <a href="#services">Services</a>
-    <a href="#providers">Providers</a>
-    <a href="#info">Patient&nbsp;Info</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="heroContent">
-    <h1>Care That Feels Close&nbsp;to&nbsp;Home</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus.</p>
-    <a href="#info" class="cta">Book&nbsp;Appointment</a>
-  </div>
-</header>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="center">
-    <h2>Our&nbsp;Services</h2>
-    <p style="margin-top:10px">Comprehensive primary care for every stage of life.</p>
-  </div>
-  <div class="servicesGrid">
-    <div class="service">
-      <i class="fa-solid fa-stethoscope"></i>
-      <h3>Family&nbsp;Medicine</h3>
-      <p>Routine check-ups, chronic care, wellness counseling.</p>
-    </div>
-    <div class="service">
-      <i class="fa-solid fa-user-nurse"></i>
-      <h3>Pediatrics</h3>
-      <p>Immunizations, growth tracking &amp; same-day sick visits.</p>
-    </div>
-    <div class="service">
-      <i class="fa-solid fa-heart-pulse"></i>
-      <h3>Preventive&nbsp;Care</h3>
-      <p>Annual physicals, screenings and lab work.</p>
-    </div>
-    <div class="service">
-      <i class="fa-solid fa-syringe"></i>
-      <h3>Vaccinations</h3>
-      <p>Flu, travel and school-required immunizations.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROVIDERS -->
-<section id="providers">
-  <div class="center">
-    <h2>Meet&nbsp;Our&nbsp;Team</h2>
-  </div>
-  <div class="docGrid">
-    <div class="docCard">
-      <img src="https://i.pravatar.cc/150?img=11" alt="Doctor avatar">
-      <span>Dr.&nbsp;Jane&nbsp;Smith, DO</span>
-      <p>Family Medicine</p>
-    </div>
-    <div class="docCard">
-      <img src="https://i.pravatar.cc/150?img=55" alt="Doctor avatar">
-      <span>Dr.&nbsp;Michael&nbsp;Lee, MD</span>
-      <p>Pediatrics</p>
-    </div>
-    <div class="docCard">
-      <img src="https://i.pravatar.cc/150?img=8" alt="Doctor avatar">
-      <span>Dr.&nbsp;Sara&nbsp;Patel, MD</span>
-      <p>Internal Medicine</p>
-    </div>
-  </div>
-</section>
-
-<!-- PATIENT INFO -->
-<section id="info">
-  <div class="center">
-    <h2>Patient&nbsp;Information</h2>
-  </div>
-  <div class="infoGrid">
-    <!-- hours -->
-    <div class="block hours">
-      <i class="fa-regular fa-clock"></i>
-      <h3>Clinic&nbsp;Hours</h3>
-      <p>Mon–Fri&nbsp;·&nbsp;8 AM – 5 PM<br>Sat&nbsp;·&nbsp;9 AM – 1 PM<br>Sun&nbsp;·&nbsp;Closed</p>
-    </div>
-    <!-- contact -->
-    <div class="block">
-      <i class="fa-solid fa-phone"></i>
-      <h3>Contact</h3>
-      <p>(555)&nbsp;555-0100<br>info@riverbendclinic.demo</p>
-    </div>
-    <!-- portals -->
-    <div class="block">
-      <i class="fa-solid fa-laptop-medical"></i>
-      <h3>Patient&nbsp;Portals</h3>
-      <div class="portalBtns">
-        <a href="#"><i class="fa-solid fa-user"></i>New Patient</a>
-        <a href="#"><i class="fa-solid fa-file-lines"></i>Existing Portal</a>
+      /* FOOTER */
+      footer {
+        background: var(--ink);
+        color: #e6e9ec;
+        text-align: center;
+        font-size: 0.84rem;
+        padding: 60px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="brand">Riverbend&nbsp;Health</div>
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
       </div>
-    </div>
-  </div>
+      <div class="navLinks" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#founder">Our&nbsp;Founder</a>
+        <a href="#providers">Providers</a>
+        <a href="#info">Patient&nbsp;Info</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-  <!-- insurance logos -->
-  <div class="insureWrap">
-    <img src="https://picsum.photos/seed/ins1/120/32" alt="Insurance logo">
-    <img src="https://picsum.photos/seed/ins2/120/32" alt="Insurance logo">
-    <img src="https://picsum.photos/seed/ins3/120/32" alt="Insurance logo">
-    <img src="https://picsum.photos/seed/ins4/120/32" alt="Insurance logo">
-  </div>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="heroContent">
+        <h1>Healthcare Rooted in Community &amp; Compassion</h1>
+        <p>
+          Founded by Dr.&nbsp;Elena&nbsp;Rivera, a hometown physician on a
+          mission to make modern, preventive care accessible to every neighbor.
+        </p>
+        <a href="#" class="cta">Schedule a Visit</a>
+      </div>
+    </header>
 
-  <!-- MAP -->
-  <div class="mapWrap" style="margin-top:50px">
-    <iframe
-      loading="lazy"
-      title="Google Map placeholder"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000001"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="center">
+        <h2>Complete&nbsp;Family&nbsp;Care</h2>
+        <p style="margin-top: 10px">
+          From toddlers to grandparents, we keep Riverbend thriving.
+        </p>
+      </div>
+      <div class="servicesGrid">
+        <div class="service">
+          <i class="fa-solid fa-stethoscope"></i>
+          <h3>Family&nbsp;Medicine</h3>
+          <p>
+            Well-checks, chronic condition management and lifestyle coaching.
+          </p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-children"></i>
+          <h3>Pediatrics</h3>
+          <p>Same-day sick visits, vaccinations and growth milestones.</p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-heart-pulse"></i>
+          <h3>Preventive&nbsp;Screenings</h3>
+          <p>Annual physicals, labs and early detection programs.</p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-person-walking-luggage"></i>
+          <h3>Travel&nbsp;Medicine</h3>
+          <p>Region-specific vaccines and pre-trip consultations.</p>
+        </div>
+      </div>
+    </section>
 
-<!-- FOOTER -->
-<footer id="contact">
-  <p>&copy; <span id="yr"></span> Riverbend&nbsp;Clinic — Demo Layout</p>
-</footer>
+    <!-- ABOUT FOUNDER -->
+    <section id="founder">
+      <div class="center">
+        <h2>Meet&nbsp;Dr.&nbsp;Elena&nbsp;Rivera</h2>
+      </div>
 
-<script>
-/* year stamp */
-document.getElementById('yr').textContent=new Date().getFullYear();
+      <div class="aboutWrap">
+        <img
+          src="https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Dr. Elena Rivera smiling in clinic hallway" />
+        <div class="aboutText">
+          <p>
+            <strong>Riverbend Health began as one physician’s promise.</strong>
+            After losing her father to a preventable heart attack,
+            Dr.&nbsp;Elena Rivera returned to her childhood neighborhood
+            determined to break barriers between modern care and working-class
+            families.
+          </p>
+          <p>
+            She opened a single-room practice in 2012, partnering with local
+            grocers to host “wellness checkout” pop-ups. Today, Riverbend has
+            grown into a full-service clinic recognized for short wait times,
+            transparent pricing and staff who greet patients by name.
+          </p>
+          <p>
+            Dr.&nbsp;Rivera’s guiding belief is simple:
+            <em>healthcare should feel like hospitality.</em> You’ll see it in
+            our cozy exam rooms, hear it in the follow-up calls after every
+            visit, and experience it in our sliding-scale payment plans.
+          </p>
+          <a href="#" class="cta" style="max-width: fit-content"
+            >Read the Full Story</a
+          >
+        </div>
+      </div>
+    </section>
 
-/* mobile nav toggle */
-const burger=document.getElementById('burger'),
-      links=document.getElementById('navLinks');
-burger.addEventListener('click',()=>links.classList.toggle('open'));
-</script>
-</body>
+    <!-- PROVIDERS -->
+    <section id="providers">
+      <div class="center">
+        <h2>Our&nbsp;Care&nbsp;Team</h2>
+      </div>
+      <div class="docGrid">
+        <div class="docCard">
+          <img src="https://i.pravatar.cc/150?img=25" alt="Doctor avatar" />
+          <span>Dr.&nbsp;Jane&nbsp;Smith, DO</span>
+          <p>Family Medicine</p>
+        </div>
+        <div class="docCard">
+          <img src="https://i.pravatar.cc/150?img=55" alt="Doctor avatar" />
+          <span>Dr.&nbsp;Michael&nbsp;Lee, MD</span>
+          <p>Pediatrics</p>
+        </div>
+        <div class="docCard">
+          <img src="https://i.pravatar.cc/150?img=21" alt="Doctor avatar" />
+          <span>Dr.&nbsp;Sara&nbsp;Patel, MD</span>
+          <p>Internal Medicine</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PATIENT INFO -->
+    <section id="info">
+      <div class="center">
+        <h2>Patient&nbsp;Resources</h2>
+      </div>
+      <div class="infoGrid">
+        <div class="block">
+          <i class="fa-regular fa-clock"></i>
+          <h3>Clinic&nbsp;Hours</h3>
+          <p>
+            Mon–Fri&nbsp;8 AM–5 PM<br />Sat&nbsp;9 AM–1 PM<br />Sun&nbsp;Closed
+          </p>
+        </div>
+        <div class="block">
+          <i class="fa-solid fa-phone"></i>
+          <h3>Contact&nbsp;Us</h3>
+          <p>(555)&nbsp;555-0100<br />hello@riverbend.demo</p>
+        </div>
+        <div class="block">
+          <i class="fa-solid fa-laptop-medical"></i>
+          <h3>Patient&nbsp;Portals</h3>
+          <div class="portalBtns">
+            <a href="#"
+              ><i class="fa-solid fa-user-plus"></i>New&nbsp;Patient</a
+            >
+            <a href="#"
+              ><i class="fa-solid fa-file-lines"></i>Existing&nbsp;Login</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- insurance logos -->
+      <div class="insureWrap">
+        <img
+          src="https://picsum.photos/seed/ins1/120/32"
+          alt="Insurance logo" />
+        <img
+          src="https://picsum.photos/seed/ins2/120/32"
+          alt="Insurance logo" />
+        <img
+          src="https://picsum.photos/seed/ins3/120/32"
+          alt="Insurance logo" />
+        <img
+          src="https://picsum.photos/seed/ins4/120/32"
+          alt="Insurance logo" />
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="testGrid">
+        <div class="quote">
+          “Riverbend feels less like a clinic and more like visiting family. The
+          nurses even remembered my daughter’s soccer game.”
+        </div>
+        <div class="quote">
+          “Transparent pricing saved us hundreds. Dr.&nbsp;Rivera explained
+          every charge before anything was done.”
+        </div>
+        <div class="quote">
+          “I booked online, waited five minutes, and left with a clear action
+          plan. Best healthcare experience I’ve had.”
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="mapWrap" style="margin-top: 60px">
+        <iframe
+          loading="lazy"
+          title="Google Map placeholder"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.889584895458!2d-93.09934848462385!3d44.944117779098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52b333562f6627e3%3A0xc7e036253e9fe1a!2sSaint%20Paul%20MN!5e0!3m2!1sen!2sus!4v1700000000001"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+      <p>
+        &copy; <span id="yr"></span> Riverbend&nbsp;Community&nbsp;Health —
+        Demo&nbsp;Layout
+      </p>
+    </footer>
+
+    <script>
+      /* year stamp */
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      /* mobile nav toggle */
+      const burger = document.getElementById("burger"),
+        links = document.getElementById("navLinks");
+      burger.addEventListener("click", () => links.classList.toggle("open"));
+    </script>
+  </body>
 </html>
