@@ -1,366 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Nebula Studio · Story Demo</title>
 
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Nebula Studio · Demo</title>
+    <meta
+      name="description"
+      content="Follow the Nebula Studio origin story through three signature projects." />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Barlow+Condensed:wght@700&display=swap"
+      onload="this.rel='stylesheet'" />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Barlow+Condensed:wght@700&display=swap"
+    /></noscript>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<!-- type + icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Barlow+Condensed:wght@700&display=swap"
-  rel="stylesheet">
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      /* ---------- TOKENS ---------- */
+      :root {
+        --bg: #0c0d11;
+        --ink: #c9cbd1;
+        --accent: #ff3fa1;
+        --accent-b: #00cfd8;
+        --surface: #1c1e22;
+        --border: #2b2d32;
+        --sans: "Inter", sans-serif;
+        --display: "Barlow Condensed", sans-serif;
+      }
 
-<style>
-/* ---------- COLOR SYSTEM ---------- */
-:root {
-  --bg: #111214;
-  --ink: #c9cbd1;
-  --accent: #ff2d95;
-  --accent-b: #00cfd8;
-  --surface: #1c1e22;
-  --border: #2b2d32;
-  --sans: "Inter", sans-serif;
-  --display: "Barlow Condensed", sans-serif;
-}
+      /* ---------- BASE ---------- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font: 1rem/1.7 var(--sans);
+        color: var(--ink);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      h1 {
+        font-size: clamp(2.6rem, 7vw, 4rem);
+        color: #fff;
+      }
+      h2 {
+        font-size: clamp(2.1rem, 5vw, 3rem);
+        color: #fff;
+      }
+      h3 {
+        font-size: clamp(1.3rem, 3vw, 1.7rem);
+        color: var(--accent);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      a:hover,
+      a:focus {
+        opacity: 0.85;
+        outline: none;
+      }
+      :focus-visible {
+        outline: 2px dashed var(--accent-b);
+        outline-offset: 3px;
+      }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+      /* ---------- RADIAL MENU ---------- */
+      #menuToggle {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--accent), var(--accent-b));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #111;
+        font-size: 1.6rem;
+        font-weight: 700;
+        z-index: 1400;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.45);
+      }
+      nav#radial {
+        position: fixed;
+        top: 49px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        pointer-events: none;
+        z-index: 1300;
+        transition: width 0.4s, height 0.4s;
+      }
+      nav#radial.open {
+        width: 240px;
+        height: 240px;
+        pointer-events: auto;
+      }
+      nav#radial a {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(110px)
+          rotate(calc(-1 * var(--angle)));
+        width: 120px;
+        text-align: center;
+        font-family: var(--display);
+        font-size: 1.2rem;
+        color: #fff;
+        text-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
+        opacity: 0;
+        transition: opacity 0.3s 0.1s;
+      }
+      nav#radial.open a {
+        opacity: 1;
+      }
 
-body {
-  font: 1rem/1.7 var(--sans);
-  color: var(--ink);
-  background: var(--bg);
-}
+      /* ---------- HERO ---------- */
+      .hero {
+        height: 100vh;
+        min-height: 560px;
+        position: relative;
+      }
+      .hero picture,
+      img {
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(0, 207, 216, 0.5),
+          rgba(255, 63, 161, 0.45)
+        );
+        mix-blend-mode: overlay;
+      }
+      .heroContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 6vw;
+      }
+      .heroContent h1 span {
+        background: linear-gradient(transparent 65%, var(--accent) 65%);
+        padding: 0 0.2em;
+      }
+      .heroContent p {
+        margin-top: 22px;
+        max-width: 46ch;
+      }
+      .cta {
+        display: inline-block;
+        margin-top: 34px;
+        padding: 1rem 2.4rem;
+        background: var(--accent-b);
+        color: #111;
+        font-weight: 600;
+        border-radius: 4px;
+      }
 
-h1,
-h2,
-h3 {
-  font-family: var(--display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .6px;
-}
+      /* ---------- SECTIONS ---------- */
+      main section {
+        padding: clamp(90px, 12vw, 140px) clamp(22px, 8vw, 100px);
+      }
+      .centerTxt {
+        text-align: center;
+        max-width: 880px;
+        margin: 0 auto 60px;
+      }
 
-h1 {
-  font-size: clamp(2.6rem, 7vw, 4rem);
-  color: #fff;
-}
+      /* ---------- STORY CASES ---------- */
+      .caseGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 48px;
+        align-items: center;
+      }
+      .caseGrid:nth-child(even) {
+        direction: rtl;
+      } /* zig-zag layout */
+      .caseGrid figure {
+        margin: 0;
+      }
+      .caseGrid img {
+        width: 100%;
+        border: 3px solid var(--border);
+        display: block;
+      }
+      .caseTxt {
+        direction: ltr;
+      }
+      .caseTxt h3 {
+        margin-bottom: 14px;
+      }
+      .caseTxt p {
+        font-size: 0.95rem;
+        color: #c3c6cb;
+      }
 
-h2 {
-  font-size: clamp(2.1rem, 5vw, 3rem);
-  color: #fff;
-}
+      /* ---------- CONTACT BANNER ---------- */
+      .banner {
+        background: linear-gradient(100deg, var(--accent), var(--accent-b));
+        text-align: center;
+        padding: 90px 16px;
+      }
+      .banner h2 {
+        color: #111;
+      }
+      .banner a {
+        display: inline-block;
+        margin-top: 32px;
+        background: #111;
+        color: #fff;
+        padding: 0.9rem 2.4rem;
+        font-weight: 500;
+        border-radius: 4px;
+      }
 
-h3 {
-  font-size: clamp(1.3rem, 3vw, 1.7rem);
-  color: var(--accent);
-}
+      /* ---------- FOOTER ---------- */
+      footer {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #8e9298;
+        padding: 70px 16px;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: opacity .2s;
-}
+  <body>
+    <!-- RADIAL MENU -->
+    <button
+      id="menuToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">
+      ☰
+    </button>
+    <nav id="radial" aria-label="Primary">
+      <a href="#spark" style="--angle: -60deg">Spark</a>
+      <a href="#lift" style="--angle: 20deg">Lift-off</a>
+      <a href="#orbit" style="--angle: 100deg">Orbit</a>
+      <a href="#contact" style="--angle: 180deg">Contact</a>
+    </nav>
 
-a:hover {
-  opacity: .85;
-}
+    <!-- HERO -->
+    <header class="hero">
+      <picture>
+        <source
+          srcset="
+            https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80&sat=-25
+          "
+          type="image/jpeg" />
+        <img
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80&sat=-25"
+          alt=""
+          loading="lazy"
+          decoding="async" />
+      </picture>
+      <div class="heroContent">
+        <h1><span>We craft visual&nbsp;stories</span></h1>
+        <p>
+          From the first spark of an idea to full-scale brand galaxies, we
+          design experiences that leave a cosmic imprint.
+        </p>
+        <a href="#spark" class="cta">Begin&nbsp;the&nbsp;Journey</a>
+      </div>
+    </header>
 
-/* ---------- OVERLAY NAV ---------- */
-#burger {
-  position: fixed;
-  top: 22px;
-  right: 22px;
-  z-index: 1200;
-  width: 32px;
-  height: 24px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    <main>
+      <!-- CHAPTER 1 -->
+      <section id="spark">
+        <div class="centerTxt"><h2>The&nbsp;Spark</h2></div>
+        <div class="caseGrid">
+          <figure>
+            <img
+              src="https://picsum.photos/seed/cafe/600/420"
+              alt="Brand identity for Cosmic Café"
+              loading="lazy" />
+          </figure>
+          <div class="caseTxt">
+            <h3>Cosmic&nbsp;Café – Brand&nbsp;Identity</h3>
+            <p>
+              We brewed a logo constellation, orbiting colour system and
+              aroma-in-motion typography for a boutique coffee house aiming to
+              transport customers “beyond the daily grind.”
+            </p>
+          </div>
+        </div>
+      </section>
 
-#burger span {
-  height: 3px;
-  background: #fff;
-}
+      <!-- CHAPTER 2 -->
+      <section id="lift">
+        <div class="centerTxt"><h2>Lift-off</h2></div>
+        <div class="caseGrid">
+          <figure>
+            <img
+              src="https://picsum.photos/seed/install/600/420"
+              alt="Interactive light installation"
+              loading="lazy" />
+          </figure>
+          <div class="caseTxt">
+            <h3>Nova&nbsp;Pulse – Interactive&nbsp;Installation</h3>
+            <p>
+              An immersive art piece that reacts to visitor movement with
+              ripples of colour and sound. Our motion team handled projection
+              mapping and a WebGL control panel.
+            </p>
+          </div>
+        </div>
+      </section>
 
-#overlayNav {
-  position: fixed;
-  inset: 0;
-  background: rgba(17, 18, 20, .95);
-  backdrop-filter: blur(4px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 42px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .35s;
-  z-index: 1100;
-}
+      <!-- CHAPTER 3 -->
+      <section id="orbit">
+        <div class="centerTxt"><h2>Orbit</h2></div>
+        <div class="caseGrid">
+          <figure>
+            <img
+              src="https://picsum.photos/seed/eco/600/420"
+              alt="Eco-nonprofit responsive site"
+              loading="lazy" />
+          </figure>
+          <div class="caseTxt">
+            <h3>Planet&nbsp;Forward – Web&nbsp;Platform</h3>
+            <p>
+              A headless CMS, blazing-fast JAMstack front-end and animated data
+              stories—all optimised for a global audience of eco-advocates and
+              educators.
+            </p>
+          </div>
+        </div>
+      </section>
 
-#overlayNav.open {
-  opacity: 1;
-  pointer-events: auto;
-}
+      <!-- CONTACT -->
+      <section id="contact" class="banner">
+        <h2>Ready to write your chapter?</h2>
+        <a href="#">Start&nbsp;a&nbsp;Project</a>
+      </section>
+    </main>
 
-#overlayNav a {
-  font-family: var(--display);
-  font-size: 2rem;
-  text-transform: uppercase;
-}
+    <footer>
+      &copy; <span id="yr"></span> Nebula&nbsp;Studio • Demo Layout
+    </footer>
 
-/* ---------- HERO ---------- */
-.hero {
-  height: 100vh;
-  min-height: 540px;
-  background: url("https://picsum.photos/seed/creativehero/1600/900") center/cover;
-  position: relative;
-}
+    <script>
+      /* Year */
+      document.getElementById("yr").textContent = new Date().getFullYear();
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(0, 207, 216, .55), rgba(255, 45, 149, .5));
-  mix-blend-mode: overlay;
-}
+      /* Radial menu */
+      const btn = document.getElementById("menuToggle");
+      const nav = document.getElementById("radial");
 
-.heroContent {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 12%;
-  max-width: 700px;
-}
+      btn.addEventListener("click", () => toggleMenu());
+      nav.addEventListener("click", e => {
+        if (e.target.tagName === "A") toggleMenu(false);
+      });
 
-.heroContent p {
-  margin-top: 22px;
-  max-width: 38ch;
-}
-
-.cta {
-  display: inline-block;
-  margin-top: 34px;
-  background: var(--accent);
-  color: #fff;
-  padding: 1rem 2.2rem;
-  font-weight: 600;
-  border-radius: 4px;
-}
-
-/* ---------- SECTIONS ---------- */
-section {
-  padding: clamp(90px, 12vw, 140px) clamp(22px, 8vw, 100px);
-}
-
-.centerTxt {
-  text-align: center;
-  max-width: 880px;
-  margin: 0 auto 60px;
-}
-
-/* ---------- PORTFOLIO — masonry --------- */
-#masonry {
-  column-count: 3;
-  column-gap: 18px;
-}
-
-@media(max-width:900px) {
-  #masonry {
-    column-count: 2;
-  }
-}
-
-@media(max-width:600px) {
-  #masonry {
-    column-count: 1;
-  }
-}
-
-.thumb {
-  width: 100%;
-  margin-bottom: 18px;
-  display: block;
-  border: 2px solid var(--border);
-  transition: transform .3s;
-}
-
-.thumb:hover {
-  transform: scale(1.03);
-}
-
-/* ---------- SERVICES STRIP ---------- */
-.serviceStrip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 34px;
-  justify-content: center;
-}
-
-.serviceCard {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 32px 30px;
-  width: 300px;
-}
-
-.serviceCard i {
-  font-size: 2.2rem;
-  color: var(--accent-b);
-}
-
-.serviceCard p {
-  margin-top: 10px;
-  font-size: .9rem;
-  color: #c3c6cb;
-}
-
-/* ---------- TESTIMONIAL ---------- */
-.testi {
-  background: var(--surface);
-  border-left: 6px solid var(--accent);
-  padding: 28px 32px;
-  max-width: 680px;
-  margin: 0 auto;
-  font-style: italic;
-  line-height: 1.6;
-  color: #e0e2e4;
-}
-
-/* ---------- CONTACT BANNER ---------- */
-.banner {
-  background: linear-gradient(100deg, var(--accent), var(--accent-b));
-  text-align: center;
-  padding: 90px 16px;
-}
-
-.banner h2 {
-  color: #111;
-}
-
-.banner a {
-  display: inline-block;
-  margin-top: 32px;
-  background: #111;
-  color: #fff;
-  padding: .9rem 2.4rem;
-  font-weight: 500;
-  border-radius: 4px;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  text-align: center;
-  font-size: .8rem;
-  color: #8e9298;
-  padding: 70px 16px;
-  border-top: 1px solid var(--border);
-}
-</style>
-</head>
-
-<body>
-
-<!-- overlay nav -->
-<div id="overlayNav">
-  <a href="#work">Work</a>
-  <a href="#services">Services</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<!-- burger -->
-<div id="burger"><span></span><span></span><span></span></div>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="heroContent">
-    <h1>We craft visual&nbsp;stories</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis.</p>
-    <a href="#work" class="cta">See Portfolio</a>
-  </div>
-</header>
-
-<!-- PORTFOLIO -->
-<section id="work">
-  <div class="centerTxt">
-    <h2>Selected&nbsp;Work</h2>
-  </div>
-  <div id="masonry">
-    <img class="thumb" src="https://picsum.photos/seed/1/600/800" alt="Placeholder art">
-    <img class="thumb" src="https://picsum.photos/seed/2/600/500" alt="Placeholder art">
-    <img class="thumb" src="https://picsum.photos/seed/3/600/700" alt="Placeholder art">
-    <img class="thumb" src="https://picsum.photos/seed/4/600/600" alt="Placeholder art">
-    <img class="thumb" src="https://picsum.photos/seed/5/600/450" alt="Placeholder art">
-    <img class="thumb" src="https://picsum.photos/seed/6/600/760" alt="Placeholder art">
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="centerTxt">
-    <h2>What&nbsp;We&nbsp;Do</h2>
-  </div>
-  <div class="serviceStrip">
-    <div class="serviceCard">
-      <i class="fa-solid fa-pen-ruler"></i>
-      <h3>Brand&nbsp;Identity</h3>
-      <p>Logos, color systems and voice guidelines.</p>
-    </div>
-    <div class="serviceCard">
-      <i class="fa-solid fa-display"></i>
-      <h3>Web&nbsp;Design</h3>
-      <p>Responsive, accessible and lightning-fast sites.</p>
-    </div>
-    <div class="serviceCard">
-      <i class="fa-solid fa-photo-film"></i>
-      <h3>Content&nbsp;Creation</h3>
-      <p>Photography, video and motion for social &amp; ads.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL -->
-<section id="about">
-  <div class="centerTxt">
-    <h2>Clients&nbsp;Say</h2>
-  </div>
-  <blockquote class="testi">
-    “Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla. Best creative
-    partner we've hired, period.”
-  </blockquote>
-</section>
-
-<!-- CONTACT BANNER -->
-<section id="contact" class="banner">
-  <h2>Ready to elevate your brand?</h2>
-  <a href="#">Start&nbsp;a&nbsp;Project</a>
-</section>
-
-<footer>&copy; <span id="yr"></span> Nebula&nbsp;Studio • Demo Layout</footer>
-
-<script>
-/* year */
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-/* overlay nav */
-const burger = document.getElementById('burger');
-const nav = document.getElementById('overlayNav');
-burger.addEventListener('click', () => nav.classList.toggle('open'));
-</script>
-</body>
-
+      function toggleMenu(state) {
+        const open = state ?? btn.getAttribute("aria-expanded") === "false";
+        btn.setAttribute("aria-expanded", open);
+        nav.classList.toggle("open", open);
+      }
+    </script>
+  </body>
 </html>

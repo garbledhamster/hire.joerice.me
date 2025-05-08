@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* burger -------------------------------------------------------------- */
   const burger = document.querySelector(".menuToggle");
-  const nav    = document.getElementById("mainNav");
+  const nav = document.getElementById("mainNav");
   if (burger && nav) burger.onclick = () => nav.classList.toggle("open");
 
   /* markdown conversion ------------------------------------------------- */
@@ -19,10 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".markdown > template, .md").forEach(render);
 
   /* flip-card gallery + live demo modal -------------------------------- */
-  const modal  = document.getElementById("demoModal"),
-        frame  = document.getElementById("demoFrame"),
-        closer = document.getElementById("closeDemo");
+  const modal = document.getElementById("demoModal"),
+    frame = document.getElementById("demoFrame"),
+    closer = document.getElementById("closeDemo");
 
+  /* helper to open modal and lock scroll */
+  const openDemo = url => {
+    frame.src = url;
+    modal.classList.add("show");
+    document.body.classList.add("noScroll"); // 🌟 freeze background
+  };
+
+  /* helper to close modal and unlock scroll */
+  const closeDemo = () => {
+    modal.classList.remove("show");
+    document.body.classList.remove("noScroll");
+    frame.removeAttribute("src"); // stop any media
+  };
+
+  /* flip cards --------------------------------------------------------- */
   document.querySelectorAll(".tpl").forEach(card => {
     card.addEventListener("click", () => {
       /* first click → flip */
@@ -31,15 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       /* second click → open demo */
-      frame.src = card.dataset.demo;
-      modal.classList.add("show");
-      card.classList.remove("flip");              // reset for next time
+      openDemo(card.dataset.demo);
+      card.classList.remove("flip"); // reset for next time
     });
   });
 
-  /* modal close */
-  if (closer) closer.onclick = () => modal.classList.remove("show");
-  if (modal)  modal.addEventListener("click", e => {
-    if (e.target === modal) modal.classList.remove("show");
+  /* modal close triggers ----------------------------------------------- */
+  closer?.addEventListener("click", closeDemo);
+  modal?.addEventListener("click", e => {
+    if (e.target === modal) closeDemo(); // click outside iframe
   });
 });
