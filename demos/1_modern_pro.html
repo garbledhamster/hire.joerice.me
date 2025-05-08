@@ -14,9 +14,327 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- main stylesheet -->
     <link rel="stylesheet" href="tour.css" />
+
+    <style>
+      /* ===== design tokens ================================================== */
+      :root {
+        --deep: #0d1117;
+        --ink: #1e242b;
+        --sky: #0058d6;
+        --ice: #f5f7fa;
+        --paper: #fff;
+        --border: #d0d6df;
+        --tip: #ffe9e9; /* new reddish tip background            */
+        --body: "Inter", sans-serif;
+        --head: "Playfair Display", serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font: 1rem/1.6 var(--body);
+        background: var(--ice);
+        color: var(--ink);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--head);
+        font-weight: 600;
+        color: var(--deep);
+      }
+      h1 {
+        font-size: clamp(2.2rem, 6vw, 3.4rem);
+      }
+      h2 {
+        font-size: clamp(1.55rem, 4vw, 2.2rem);
+      }
+      h3 {
+        font-size: clamp(1.2rem, 3vw, 1.45rem);
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ===== tip cards ====================================================== */
+      .guide {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.96);
+        width: clamp(260px, 80%, 520px);
+        padding: 22px;
+        background: var(--tip);
+        color: #3a3a3a;
+        border: 2px solid #f5b3b3;
+        border-radius: 12px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        line-height: 1.48;
+        font-size: 0.92rem;
+        z-index: 1150;
+        display: none;
+        animation: pop 0.35s ease;
+      }
+      @keyframes pop {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -44%) scale(0.92);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .guide strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      /* ===== frame & pulse ================================================== */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.9);
+        }
+        80% {
+          box-shadow: 0 0 0 22px rgba(255, 165, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 22px rgba(255, 165, 0, 0);
+        }
+      }
+      .highlight {
+        animation: pulse 7.5s ease-out;
+      }
+      #hlBox {
+        position: absolute;
+        border: 3px solid #ffa500;
+        border-radius: 8px;
+        pointer-events: none;
+        z-index: 1149;
+        transition: 0.25s;
+      }
+
+      /* ===== sidebar & layout ============================================== */
+      #sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: 260px;
+        background: var(--paper);
+        border-right: 1px solid var(--border);
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        z-index: 1000;
+        transition: 0.3s;
+      }
+      #logo {
+        font-family: var(--head);
+        font-size: 1.6rem;
+        color: var(--sky);
+      }
+      #nav a {
+        display: block;
+        padding: 10px 0;
+        font-weight: 500;
+      }
+      #nav a:hover {
+        color: var(--sky);
+      }
+      .burger {
+        display: none;
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        width: 28px;
+        height: 22px;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 1100;
+      }
+      .burger span {
+        display: block;
+        height: 3px;
+        background: var(--deep);
+      }
+      @media (max-width: 880px) {
+        #sidebar {
+          transform: translateX(-100%);
+        }
+        #sidebar.open {
+          transform: translateX(0);
+        }
+        .burger {
+          display: flex;
+        }
+      }
+      main {
+        margin-left: 260px;
+      }
+      @media (max-width: 880px) {
+        main {
+          margin-left: 0;
+        }
+      }
+
+      /* ===== hero ============================================================== */
+      .hero {
+        position: relative;
+        height: 84vh;
+        min-height: 480px;
+        background: url("https://picsum.photos/seed/boardroom/1600/900")
+          center/cover;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(13, 17, 23, 0.65);
+      }
+      .heroContent {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 10%;
+      }
+      .heroContent h1 {
+        color: #fff;
+        max-width: 18ch;
+      }
+      .heroContent p {
+        color: #c9d1d9;
+        margin: 22px 0 30px;
+        max-width: 46ch;
+      }
+      .cta {
+        display: inline-block;
+        background: var(--sky);
+        color: #fff;
+        padding: 0.9rem 2rem;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+      .cta:hover {
+        background: #0041a4;
+      }
+
+      /* ===== sections ======================================================== */
+      section {
+        padding: clamp(70px, 12vw, 110px) clamp(18px, 5vw, 70px);
+      }
+      .servicesGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 28px;
+      }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        padding: 38px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+      .card i {
+        font-size: 2rem;
+        color: var(--sky);
+      }
+      .card p {
+        font-size: 0.94rem;
+        color: #5b636d;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+        background: var(--sky);
+        color: #fff;
+      }
+      .stat {
+        padding: 44px 14px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .stat:last-child {
+        border: 0;
+      }
+      .stat h3 {
+        font-size: 1.9rem;
+      }
+      .stat span {
+        font-size: 0.88rem;
+      }
+      .contact {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        max-width: 660px;
+        margin-inline: auto;
+        padding: 50px 38px;
+      }
+      .contact form {
+        display: grid;
+        gap: 20px;
+      }
+      .contact input,
+      .contact textarea {
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+      }
+      .contact button {
+        background: var(--sky);
+        color: #fff;
+        padding: 0.85rem;
+        border: none;
+        border-radius: 3px;
+        font-weight: 500;
+      }
+      .contact button:hover {
+        background: #0041a4;
+      }
+
+      /* ===== map ============================================================= */
+      .mapWrap {
+        max-width: 960px;
+        margin: 60px auto 0;
+        padding: 0 20px;
+      }
+      .mapWrap iframe {
+        width: 100%;
+        height: 320px;
+        border: 0;
+      }
+
+      /* ===== footer ========================================================== */
+      footer {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #7c868f;
+        padding: 70px 0 60px;
+      }
+
+      /* ===== mobile tweaks for bar/tip ====================================== */
+      @media (max-width: 480px) {
+        .guide {
+          width: 90%;
+          padding: 18px;
+        }
+        #tourBar {
+          height: 56px;
+        }
+        #tourBar.animating {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- burger -->
@@ -28,10 +346,8 @@
     <aside id="sidebar">
       <div id="logo">Jordan<span style="color: var(--ink)">Blake</span></div>
       <nav id="nav">
-        <a href="#services">Services</a>
-        <a href="#about">About&nbsp;Me</a>
-        <a href="#stats">Results</a>
-        <a href="#contact">Contact</a>
+        <a href="#services">Services</a><a href="#about">About&nbsp;Me</a
+        ><a href="#stats">Results</a><a href="#contact">Contact</a>
       </nav>
     </aside>
 
@@ -47,10 +363,16 @@
           <a href="#contact" class="cta">Schedule&nbsp;Call</a>
         </div>
       </section>
+      <div class="guide" id="tipHero">
+        <strong>💡 Hero Tips</strong>Promise + support line. Use a relevant
+        banner image.
+      </div>
 
       <!-- services -->
       <section id="services">
-        <h2 class="center">Services&nbsp;at&nbsp;a&nbsp;Glance</h2>
+        <h2 style="text-align: center; margin-bottom: 44px">
+          Services&nbsp;at&nbsp;a&nbsp;Glance
+        </h2>
         <div class="servicesGrid">
           <div class="card">
             <i class="fa-solid fa-chart-line"></i>
@@ -71,15 +393,24 @@
           </div>
         </div>
       </section>
+      <div class="guide" id="tipServices">
+        <strong>💡 Services Tips</strong>3-6 cards, benefit-focused copy.
+      </div>
 
       <!-- about -->
       <section id="about">
-        <h2 class="center">About&nbsp;Jordan</h2>
-        <p class="aboutText">
-          After 12&nbsp;years steering operations at two Inc-5000 firms, I help
+        <h2 style="text-align: center; margin-bottom: 28px">
+          About&nbsp;Jordan
+        </h2>
+        <p style="max-width: 720px; margin-inline: auto; text-align: center">
+          After 12 years steering operations at two Inc.-5000 firms, I help
           founders translate data into decisions—without the corporate jargon.
         </p>
       </section>
+      <div class="guide" id="tipAbout">
+        <strong>💡 About Tips</strong>Short story + proof (years, press, marquee
+        wins).
+      </div>
 
       <!-- stats -->
       <section id="stats" class="stats">
@@ -100,21 +431,32 @@
           <span>Avg&nbsp;Revenue&nbsp;Lift</span>
         </div>
       </section>
+      <div class="guide" id="tipStats">
+        <strong>💡 Results Tips</strong>Pick numbers that matter; keep labels
+        clear.
+      </div>
 
       <!-- contact -->
       <section id="contact">
         <div class="contact">
-          <h2 class="center">Let’s&nbsp;Talk Growth</h2>
+          <h2 style="text-align: center; margin-bottom: 30px">
+            Let’s&nbsp;Talk Growth
+          </h2>
           <form>
-            <input type="text" placeholder="Your Name" />
-            <input type="email" placeholder="Email Address" />
+            <input type="text" placeholder="Your Name" /><input
+              type="email"
+              placeholder="Email Address" />
             <textarea
               rows="5"
-              placeholder="Tell me about your project"></textarea>
-            <button type="button">Send&nbsp;Message</button>
+              placeholder="Tell me about your project"></textarea
+            ><button type="button">Send&nbsp;Message</button>
           </form>
         </div>
       </section>
+      <div class="guide" id="tipContact">
+        <strong>💡 Contact Tips</strong>Ask only what you need. Connect this
+        form to your inbox.
+      </div>
 
       <!-- map -->
       <div class="mapWrap">
@@ -126,115 +468,24 @@
       <footer>&copy; <span id="yr"></span> Jordan Blake · Demo Mode</footer>
     </main>
 
-    <!-- ──────────────────── SCRIPTS ─────────────────────────── -->
+    <!-- step bar -->
+    <div id="tourBar">
+      <button id="startTour">
+        🧭
+        <span style="font-family: var(--head); font-size: 1rem"
+          >Begin Demo</span
+        >
+      </button>
+      <nav id="stepNav">
+        <button data-step="hero">1</button
+        ><button data-step="services">2</button>
+        <button data-step="about">3</button><button data-step="stats">4</button>
+        <button data-step="contact">5</button>
+      </nav>
+    </div>
     <script>
-      /* burger toggle */
-      const burger = document.getElementById("burger");
-      const sidebar = document.getElementById("sidebar");
       document.getElementById("yr").textContent = new Date().getFullYear();
       burger.onclick = () => sidebar.classList.toggle("open");
-    </script>
-
-    <!-- universal modular tour script -->
-    <script>
-      /* ==========================================================
-   UNIVERSAL GUIDED-TOUR SCRIPT
-   ======================================================== */
-      const bar = document.getElementById("tourBar");
-      const startBtn = document.getElementById("startTour");
-      const dots = [...document.querySelectorAll("#stepNav button")];
-
-      const steps = dots.map(btn => ({
-        focus: btn.dataset.focus,
-        tipId: btn.dataset.tip,
-      }));
-      const guides = steps.map(s => document.getElementById(s.tipId));
-
-      let hlBox, hideTipTimer, clearAllTimer;
-
-      /* orange outline */
-      function frame(el) {
-        const r = el.getBoundingClientRect();
-        if (!hlBox) {
-          hlBox = Object.assign(document.createElement("div"), { id: "hlBox" });
-          hlBox.style.cssText =
-            "position:absolute;border:3px solid #ffa500;border-radius:8px;" +
-            "pointer-events:none;z-index:1450;transition:.25s";
-          document.body.appendChild(hlBox);
-        }
-        hlBox.style.top = `${r.top + scrollY - 8}px`;
-        hlBox.style.left = `${r.left - 8}px`;
-        hlBox.style.width = `${r.width + 16}px`;
-        hlBox.style.height = `${r.height + 16}px`;
-      }
-
-      /* clear */
-      function clearAll() {
-        document
-          .querySelectorAll(".highlight")
-          .forEach(el => el.classList.remove("highlight"));
-        hlBox?.remove();
-        hlBox = null;
-        guides.forEach(g => {
-          g.style.display = "none";
-          g.classList.remove("show");
-          g.onclick = null;
-        });
-        clearTimeout(hideTipTimer);
-        clearTimeout(clearAllTimer);
-      }
-
-      /* wait for scroll settle */
-      function afterScroll(cb) {
-        let lastY = scrollY,
-          idle = 0;
-        const check = () => {
-          if (scrollY !== lastY) {
-            lastY = scrollY;
-            idle = 0;
-            requestAnimationFrame(check);
-          } else if (++idle < 2) {
-            requestAnimationFrame(check);
-          } else cb();
-        };
-        requestAnimationFrame(check);
-      }
-
-      /* show step */
-      function showStep(i) {
-        clearAll();
-        dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
-        const focusEl = document.querySelector(steps[i].focus);
-        if (!focusEl) return console.warn("No element matches", steps[i].focus);
-
-        focusEl.scrollIntoView({ behavior: "smooth", block: "center" });
-
-        afterScroll(() => {
-          focusEl.classList.add("highlight");
-          frame(focusEl);
-
-          const tip = document.getElementById(steps[i].tipId);
-          if (!tip) return console.warn("Missing tip #", steps[i].tipId);
-
-          tip.style.display = "block";
-          tip.style.top = "50%";
-          tip.style.left = "50%";
-          tip.style.transform = "translate(-50%,-50%)";
-          requestAnimationFrame(() => tip.classList.add("show"));
-
-          tip.onclick = clearAll;
-          hideTipTimer = setTimeout(() => tip.classList.remove("show"), 3000);
-          clearAllTimer = setTimeout(clearAll, 6000);
-        });
-      }
-
-      /* controls */
-      startBtn.onclick = () => {
-        bar.classList.add("animating");
-        setTimeout(() => bar.classList.add("on"), 400);
-        setTimeout(() => showStep(0), 500);
-      };
-      dots.forEach((b, i) => (b.onclick = () => showStep(i)));
     </script>
   </body>
 </html>
