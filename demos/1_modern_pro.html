@@ -3,489 +3,559 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Jordan Blake Consulting · Guided Demo</title>
+    <title>Jordan Blake Consulting · Growth with Clarity</title>
 
-    <!-- fonts & icons -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap"
       rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="tour.css" />
 
     <style>
-      /* ===== design tokens ================================================== */
       :root {
-        --deep: #0d1117;
-        --ink: #1e242b;
-        --sky: #0058d6;
-        --ice: #f5f7fa;
-        --paper: #fff;
-        --border: #d0d6df;
-        --tip: #ffe9e9; /* new reddish tip background            */
+        /* Warm palette */
+        --bg: #faf7f2;
+        --paper: #ffffff;
+        --ink: #2f2a28;
+        --accent: #ba7c5e;
+        /* warm clay */
+        --accent-dark: #9b6044;
+        --soft: #e9e1d7;
+        --soft2: #f2eae1;
+        --radius: 12px;
+        --shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
         --body: "Inter", sans-serif;
         --head: "Playfair Display", serif;
       }
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
+
       body {
-        font: 1rem/1.6 var(--body);
-        background: var(--ice);
+        background: var(--bg);
         color: var(--ink);
+        font-family: var(--body);
+        line-height: 1.6;
+        overflow-x: hidden;
       }
+
+      img {
+        display: block;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+
       h1,
       h2,
       h3 {
         font-family: var(--head);
         font-weight: 600;
-        color: var(--deep);
-      }
-      h1 {
-        font-size: clamp(2.2rem, 6vw, 3.4rem);
-      }
-      h2 {
-        font-size: clamp(1.55rem, 4vw, 2.2rem);
-      }
-      h3 {
-        font-size: clamp(1.2rem, 3vw, 1.45rem);
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
+        color: var(--ink);
       }
 
-      /* ===== tip cards ====================================================== */
-      .guide {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.96);
-        width: clamp(260px, 80%, 520px);
-        padding: 22px;
-        background: var(--tip);
-        color: #3a3a3a;
-        border: 2px solid #f5b3b3;
-        border-radius: 12px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-        line-height: 1.48;
-        font-size: 0.92rem;
-        z-index: 1150;
-        display: none;
-        animation: pop 0.35s ease;
+      /* -------------------------------------------- */
+      /* Animations */
+      /* -------------------------------------------- */
+      .fade-in {
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
       }
-      @keyframes pop {
-        0% {
-          opacity: 0;
-          transform: translate(-50%, -44%) scale(0.92);
-        }
-        100% {
+
+      .slide-up {
+        animation: slideUp 0.9s ease forwards;
+        opacity: 0;
+      }
+
+      .slide-left {
+        animation: slideLeft 0.9s ease forwards;
+        opacity: 0;
+      }
+
+      .slide-right {
+        animation: slideRight 0.9s ease forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeIn {
+        to {
           opacity: 1;
         }
       }
-      .guide strong {
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(40px);
+          opacity: 0;
+        }
+
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideLeft {
+        from {
+          transform: translateX(50px);
+          opacity: 0;
+        }
+
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideRight {
+        from {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      /* -------------------------------------------- */
+      /* Navigation */
+      /* -------------------------------------------- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        padding: 18px 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        border-bottom: 1px solid #eee;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+        font-family: var(--head);
+      }
+
+      .logo span {
+        color: var(--accent);
+      }
+
+      nav a {
+        margin-left: 24px;
+        text-decoration: none;
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      /* Mobile Burger */
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .burger span {
+        width: 26px;
+        height: 3px;
+        background: var(--ink);
+      }
+
+      /* Mobile menu */
+      #mobileMenu {
+        display: none;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--paper);
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #mobileMenu a {
         display: block;
+        padding: 12px 0;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--ink);
+      }
+
+      /* -------------------------------------------- */
+      /* Hero */
+      /* -------------------------------------------- */
+      .hero {
+        margin-top: 90px;
+        padding: 60px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .heroImg img {
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.1rem, 4vw, 3.2rem);
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        max-width: 40ch;
+        margin-bottom: 24px;
+        font-size: 1.05rem;
+      }
+
+      .cta {
+        display: inline-block;
+        padding: 14px 26px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+      }
+
+      .cta:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+      }
+
+      /* -------------------------------------------- */
+      /* Section Wrapper */
+      /* -------------------------------------------- */
+      section {
+        padding: 100px 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      /* -------------------------------------------- */
+      /* Services */
+      /* -------------------------------------------- */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: var(--paper);
+        padding: 28px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid #ddd;
+      }
+
+      .card h3 {
+        margin-bottom: 12px;
+      }
+
+      .card p {
+        opacity: 0.85;
+      }
+
+      /* -------------------------------------------- */
+      /* Image + text blocks */
+      /* -------------------------------------------- */
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      /* -------------------------------------------- */
+      /* Testimonials */
+      /* -------------------------------------------- */
+      .testimonials {
+        margin-top: 60px;
+        overflow-x: auto;
+        display: flex;
+        gap: 24px;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .testimonial {
+        flex: 0 0 260px;
+        background: var(--paper);
+        padding: 22px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        scroll-snap-align: start;
+      }
+
+      .testimonial img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
         margin-bottom: 10px;
       }
 
-      /* ===== frame & pulse ================================================== */
-      @keyframes pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.9);
-        }
-        80% {
-          box-shadow: 0 0 0 22px rgba(255, 165, 0, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 22px rgba(255, 165, 0, 0);
-        }
-      }
-      .highlight {
-        animation: pulse 7.5s ease-out;
-      }
-      #hlBox {
-        position: absolute;
-        border: 3px solid #ffa500;
-        border-radius: 8px;
-        pointer-events: none;
-        z-index: 1149;
-        transition: 0.25s;
+      .testimonial p {
+        font-size: 0.95rem;
       }
 
-      /* ===== sidebar & layout ============================================== */
-      #sidebar {
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: 260px;
+      /* -------------------------------------------- */
+      /* Contact */
+      /* -------------------------------------------- */
+      .contactBox {
         background: var(--paper);
-        border-right: 1px solid var(--border);
-        padding: 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        z-index: 1000;
+        padding: 40px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .contactBox input,
+      .contactBox textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-family: var(--body);
+        background: var(--soft2);
+      }
+
+      .contactBox button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 14px;
+        background: var(--accent);
+        color: white;
+        border-radius: 8px;
+        border: none;
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: var(--shadow);
         transition: 0.3s;
       }
-      #logo {
-        font-family: var(--head);
-        font-size: 1.6rem;
-        color: var(--sky);
+
+      .contactBox button:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
       }
-      #nav a {
-        display: block;
-        padding: 10px 0;
-        font-weight: 500;
+
+      footer {
+        text-align: center;
+        padding: 60px 0;
+        font-size: 0.9rem;
+        opacity: 0.7;
       }
-      #nav a:hover {
-        color: var(--sky);
-      }
-      .burger {
-        display: none;
-        position: fixed;
-        top: 18px;
-        left: 18px;
-        width: 28px;
-        height: 22px;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-        z-index: 1100;
-      }
-      .burger span {
-        display: block;
-        height: 3px;
-        background: var(--deep);
-      }
+
+      /* Responsive */
       @media (max-width: 880px) {
-        #sidebar {
-          transform: translateX(-100%);
+        nav {
+          display: none;
         }
-        #sidebar.open {
-          transform: translateX(0);
-        }
+
         .burger {
           display: flex;
         }
-      }
-      main {
-        margin-left: 260px;
-      }
-      @media (max-width: 880px) {
-        main {
-          margin-left: 0;
+
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
         }
-      }
 
-      /* ===== hero ============================================================== */
-      .hero {
-        position: relative;
-        height: 84vh;
-        min-height: 480px;
-        background: url("https://picsum.photos/seed/boardroom/1600/900")
-          center/cover;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(13, 17, 23, 0.65);
-      }
-      .heroContent {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 0 10%;
-      }
-      .heroContent h1 {
-        color: #fff;
-        max-width: 18ch;
-      }
-      .heroContent p {
-        color: #c9d1d9;
-        margin: 22px 0 30px;
-        max-width: 46ch;
-      }
-      .cta {
-        display: inline-block;
-        background: var(--sky);
-        color: #fff;
-        padding: 0.9rem 2rem;
-        border-radius: 4px;
-        font-weight: 500;
-      }
-      .cta:hover {
-        background: #0041a4;
-      }
-
-      /* ===== sections ======================================================== */
-      section {
-        padding: clamp(70px, 12vw, 110px) clamp(18px, 5vw, 70px);
-      }
-      .servicesGrid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 28px;
-      }
-      .card {
-        background: var(--paper);
-        border: 1px solid var(--border);
-        padding: 38px 30px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      }
-      .card i {
-        font-size: 2rem;
-        color: var(--sky);
-      }
-      .card p {
-        font-size: 0.94rem;
-        color: #5b636d;
-      }
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-        background: var(--sky);
-        color: #fff;
-      }
-      .stat {
-        padding: 44px 14px;
-        text-align: center;
-        border-right: 1px solid rgba(255, 255, 255, 0.15);
-      }
-      .stat:last-child {
-        border: 0;
-      }
-      .stat h3 {
-        font-size: 1.9rem;
-      }
-      .stat span {
-        font-size: 0.88rem;
-      }
-      .contact {
-        background: var(--paper);
-        border: 1px solid var(--border);
-        max-width: 660px;
-        margin-inline: auto;
-        padding: 50px 38px;
-      }
-      .contact form {
-        display: grid;
-        gap: 20px;
-      }
-      .contact input,
-      .contact textarea {
-        width: 100%;
-        padding: 0.75rem 0.9rem;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-      }
-      .contact button {
-        background: var(--sky);
-        color: #fff;
-        padding: 0.85rem;
-        border: none;
-        border-radius: 3px;
-        font-weight: 500;
-      }
-      .contact button:hover {
-        background: #0041a4;
-      }
-
-      /* ===== map ============================================================= */
-      .mapWrap {
-        max-width: 960px;
-        margin: 60px auto 0;
-        padding: 0 20px;
-      }
-      .mapWrap iframe {
-        width: 100%;
-        height: 320px;
-        border: 0;
-      }
-
-      /* ===== footer ========================================================== */
-      footer {
-        text-align: center;
-        font-size: 0.8rem;
-        color: #7c868f;
-        padding: 70px 0 60px;
-      }
-
-      /* ===== mobile tweaks for bar/tip ====================================== */
-      @media (max-width: 480px) {
-        .guide {
-          width: 90%;
-          padding: 18px;
+        .hero p {
+          margin-inline: auto;
         }
-        #tourBar {
-          height: 56px;
+
+        .heroImg {
+          order: -1;
         }
-        #tourBar.animating {
-          animation: none;
+
+        .split {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
+
   <body>
-    <!-- burger -->
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
+    <header>
+      <div class="logo">Jordan <span>Blake</span></div>
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#story">Story</a>
+        <a href="#testimonials">Clients</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
+      </div>
+    </header>
+
+    <div id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#story">Story</a>
+      <a href="#testimonials">Clients</a>
+      <a href="#contact">Contact</a>
     </div>
 
-    <!-- sidebar -->
-    <aside id="sidebar">
-      <div id="logo">Jordan<span style="color: var(--ink)">Blake</span></div>
-      <nav id="nav">
-        <a href="#services">Services</a><a href="#about">About&nbsp;Me</a
-        ><a href="#stats">Results</a><a href="#contact">Contact</a>
-      </nav>
-    </aside>
-
-    <main>
-      <!-- hero -->
-      <section class="hero" id="hero">
-        <div class="heroContent">
-          <h1 id="heroHead">Data-Driven Growth for Small Businesses</h1>
-          <p id="heroSub">
-            I’m Jordan Blake, a fractional COO who turns scattered metrics into
-            clear, profitable action plans.
-          </p>
-          <a href="#contact" class="cta">Schedule&nbsp;Call</a>
-        </div>
-      </section>
-      <div class="guide" id="tipHero">
-        <strong>💡 Hero Tips</strong>Promise + support line. Use a relevant
-        banner image.
-      </div>
-
-      <!-- services -->
-      <section id="services">
-        <h2 style="text-align: center; margin-bottom: 44px">
-          Services&nbsp;at&nbsp;a&nbsp;Glance
-        </h2>
-        <div class="servicesGrid">
-          <div class="card">
-            <i class="fa-solid fa-chart-line"></i>
-            <h3>Growth Strategy</h3>
-            <p>
-              Find hidden opportunities and target the right customers first.
-            </p>
-          </div>
-          <div class="card">
-            <i class="fa-solid fa-gears"></i>
-            <h3>Workflow Automation</h3>
-            <p>Cut routine tasks in half with no-code + AI tooling.</p>
-          </div>
-          <div class="card">
-            <i class="fa-solid fa-users-gear"></i>
-            <h3>Team Alignment</h3>
-            <p>Unite departments around one 90-day action plan.</p>
-          </div>
-        </div>
-      </section>
-      <div class="guide" id="tipServices">
-        <strong>💡 Services Tips</strong>3-6 cards, benefit-focused copy.
-      </div>
-
-      <!-- about -->
-      <section id="about">
-        <h2 style="text-align: center; margin-bottom: 28px">
-          About&nbsp;Jordan
-        </h2>
-        <p style="max-width: 720px; margin-inline: auto; text-align: center">
-          After 12 years steering operations at two Inc.-5000 firms, I help
-          founders translate data into decisions—without the corporate jargon.
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroText slide-right">
+        <h1>Clarity for Founders Who Carry Too Much Alone</h1>
+        <p>
+          I help small business owners make confident decisions by turning messy
+          data, scattered ideas, and overwhelming operations into a calm, clear
+          plan.
         </p>
-      </section>
-      <div class="guide" id="tipAbout">
-        <strong>💡 About Tips</strong>Short story + proof (years, press, marquee
-        wins).
+        <a href="#contact" class="cta">Let’s Talk</a>
       </div>
 
-      <!-- stats -->
-      <section id="stats" class="stats">
-        <div class="stat">
-          <h3>12+</h3>
-          <span>Years&nbsp;Experience</span>
-        </div>
-        <div class="stat">
-          <h3>150</h3>
-          <span>Projects&nbsp;Led</span>
-        </div>
-        <div class="stat">
-          <h3>96%</h3>
-          <span>Repeat&nbsp;Clients</span>
-        </div>
-        <div class="stat">
-          <h3>6×</h3>
-          <span>Avg&nbsp;Revenue&nbsp;Lift</span>
-        </div>
-      </section>
-      <div class="guide" id="tipStats">
-        <strong>💡 Results Tips</strong>Pick numbers that matter; keep labels
-        clear.
+      <div class="heroImg fade-in">
+        <img
+          src="https://picsum.photos/seed/person85/900/900"
+          alt="Founder working in warm light" />
       </div>
+    </section>
 
-      <!-- contact -->
-      <section id="contact">
-        <div class="contact">
-          <h2 style="text-align: center; margin-bottom: 30px">
-            Let’s&nbsp;Talk Growth
-          </h2>
-          <form>
-            <input type="text" placeholder="Your Name" /><input
-              type="email"
-              placeholder="Email Address" />
-            <textarea
-              rows="5"
-              placeholder="Tell me about your project"></textarea
-            ><button type="button">Send&nbsp;Message</button>
-          </form>
+    <!-- SERVICES -->
+    <section id="services">
+      <h2 class="slide-up" style="margin-bottom: 30px">How I Help</h2>
+      <div class="services">
+        <div class="card slide-up">
+          <h3>Growth Guidance</h3>
+          <p>
+            You don’t need 100 metrics. You need the right 3. I help you find
+            them and use them consistently.
+          </p>
         </div>
-      </section>
-      <div class="guide" id="tipContact">
-        <strong>💡 Contact Tips</strong>Ask only what you need. Connect this
-        form to your inbox.
+        <div class="card slide-up">
+          <h3>Team Support</h3>
+          <p>
+            Clear goals, calmer operations, and a path your team can actually
+            follow without burnout.
+          </p>
+        </div>
+        <div class="card slide-up">
+          <h3>Workflow Simplification</h3>
+          <p>
+            Tame the chaos—automations, systems, and habits that reduce stress
+            and reclaim your time.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <!-- map -->
-      <div class="mapWrap">
-        <iframe
-          loading="lazy"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11885147.347!2d-114.0!3d36!2!3m2!1i1024!2i768!4f13.1!5m2!1sen!2sus"></iframe>
+    <!-- STORY -->
+    <section id="story">
+      <div class="split">
+        <div class="slide-left">
+          <h2>A Bit About Me</h2>
+          <p>
+            I’ve spent over a decade building healthier companies—ones where the
+            founder feels supported, the team knows what matters, and the
+            business has room to breathe.
+            <br /><br />
+            My work blends analytics, operations, and a calm, human-first
+            approach to leadership.
+          </p>
+        </div>
+        <div class="fade-in">
+          <img
+            src="https://picsum.photos/seed/person33/900/900"
+            alt="Warm portrait" />
+        </div>
       </div>
+    </section>
 
-      <footer>&copy; <span id="yr"></span> Jordan Blake · Demo Mode</footer>
-    </main>
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <h2 class="center slide-up" style="margin-bottom: 30px">
+        What Clients Say
+      </h2>
 
-    <!-- step bar -->
-    <div id="tourBar">
-      <button id="startTour">
-        🧭
-        <span style="font-family: var(--head); font-size: 1rem"
-          >Begin Demo</span
-        >
-      </button>
-      <nav id="stepNav">
-        <button data-step="hero">1</button
-        ><button data-step="services">2</button>
-        <button data-step="about">3</button><button data-step="stats">4</button>
-        <button data-step="contact">5</button>
-      </nav>
-    </div>
+      <div class="testimonials">
+        <div class="testimonial slide-up">
+          <img src="https://picsum.photos/seed/person001/200/200" />
+          <p>
+            "Jordan helped me bring order to a business I felt like I was barely
+            holding together."
+          </p>
+        </div>
+
+        <div class="testimonial slide-up">
+          <img src="https://picsum.photos/seed/person002/200/200" />
+          <p>
+            "His calm way of breaking down problems made leadership enjoyable
+            again."
+          </p>
+        </div>
+
+        <div class="testimonial slide-up">
+          <img src="https://picsum.photos/seed/person003/200/200" />
+          <p>
+            "We grew faster because we finally understood what actually
+            mattered."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contactBox slide-up">
+        <h2 style="text-align: center">Reach Out Anytime</h2>
+        <form id="contactForm">
+          <input type="text" id="name" placeholder="Your Name" />
+          <input type="email" id="email" placeholder="Email Address" />
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="Tell me about what you’re building"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="yr"></span> Jordan Blake · Warm Personal Guide Demo
+    </footer>
+
     <script>
       document.getElementById("yr").textContent = new Date().getFullYear();
-      burger.onclick = () => sidebar.classList.toggle("open");
+      // Mobile menu
+      const burger = document.getElementById("burger");
+      const menu = document.getElementById("mobileMenu");
+      let open = false;
+      burger.addEventListener("click", () => {
+        open = !open;
+        menu.style.display = open ? "block" : "none";
+      });
+      // Simple form handler
+      document.getElementById("contactForm").addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Demo only — in production this would send to your inbox.");
+        e.target.reset();
+      });
     </script>
   </body>
 </html>
