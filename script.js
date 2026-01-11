@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const loadPage = async pageKey => {
+  const loadPage = async (pageKey, anchor) => {
     const page = pages[pageKey] || pages.home;
     if (!frame) return;
     document.title = page.title;
@@ -78,13 +78,36 @@ document.addEventListener("DOMContentLoaded", () => {
     frame.innerHTML = html;
     renderMarkdown(frame);
     initDemoModal(frame);
-    if (location.hash) {
-      const target = frame.querySelector(location.hash);
+    const anchorTarget = anchor ? `#${anchor}` : location.hash;
+    if (anchorTarget) {
+      const target = frame.querySelector(anchorTarget);
       target?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const pageKey =
-    new URLSearchParams(window.location.search).get("page") || "home";
-  loadPage(pageKey);
+  const parseRoute = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const pageParam = searchParams.get("page");
+    if (pageParam) {
+      return { pageKey: pageParam, anchor: location.hash.replace("#", "") };
+    }
+
+    const rawHash = location.hash.replace("#", "");
+    if (rawHash) {
+      const [hashPage, anchor] = rawHash.split(":");
+      if (pages[hashPage]) {
+        return { pageKey: hashPage, anchor };
+      }
+    }
+
+    return { pageKey: "home" };
+  };
+
+  const handleRoute = () => {
+    const { pageKey, anchor } = parseRoute();
+    loadPage(pageKey, anchor);
+  };
+
+  handleRoute();
+  window.addEventListener("hashchange", handleRoute);
 });
