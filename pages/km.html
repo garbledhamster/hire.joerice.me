@@ -38,19 +38,14 @@
 
 <section id="plans" class="pricing markdown">
   <template>
-    ### Knowledge Management Services
-    I’m coming in at an entry-level pay scale, so I want to price services
-    fairly without overcharging.
+### Knowledge Management Services
+I’m coming in at an entry-level pay scale, so I want to price services fairly without overcharging. These options are designed to keep things practical, transparent, and easy to maintain.
 
-    **1. Personal Knowledge Management Coach**
-    - Help set up a note-taking database and organize existing notes
-    - Recommend software options based on workflow needs
-    - Guide clients through setup and maintenance
+**1. Personal Knowledge Management Coach**
+Get a guided setup for a note-taking database, plus help organizing what you already have. I’ll recommend tools that match your workflow and show you how to keep it running day-to-day.
 
-    **2. Business Knowledge Management**
-    - Understand the current system and how it’s used
-    - Recommend improvements to the system and organization
-    - Help build out a new system and organize existing knowledge
+**2. Business Knowledge Management**
+Start with a review of how your current system is used, then map improvements that actually fit your team. I can help build a cleaner system and organize your existing knowledge so it’s easy to find later.
   </template>
 </section>
 
@@ -95,92 +90,4 @@
     </tbody>
   </table>
   <p class="note">Results may vary · no legal advice.</p>
-</section>
-
-<section style="max-width: 960px; margin: 60px auto; padding: 0 20px">
-  <h2 class="markdown"><template>## Sample SOP Tiers</template></h2>
-
-  <details open>
-    <summary>
-      ★ <strong>Basic Checklist SOP</strong> – &lt; 250 words
-    </summary>
-    <div class="md">
-      ``` Title: Daily Backup Verification – Azure VM ☑ Complete | Task |
-      Notes ☐ Check backup status ➜ Azure Portal › Recovery Services Vault ☐
-      Confirm latest restore point ≤ 24 h old ☐ Spot-test restore → Restore
-      VM › Latest point › Validate ☐ Record result in Teams channel
-      #ops-backups ☐ Escalate failures to on-call engineer ```
-    </div>
-  </details>
-
-  <details>
-    <summary>
-      ★★ <strong>Intermediate SOP</strong> – ≈ 500 words · Configure
-      Conditional Access in Entra ID
-    </summary>
-    <div class="md">
-      ### 1 Purpose Lock down risky sign-ins while allowing legitimate users
-      a smooth MFA path. ### 2 Scope Applies to all Entra-joined identities
-      in the **Contoso** tenant running Microsoft 365 Business Premium. ###
-      3 Prerequisites * Global Admin role * Authenticator app deployed to
-      all staff * Security info (phone + email) completed ### 4 Procedure 1.
-      Sign in to `portal.azure.com` as GA. 2. **Entra ID → Protection →
-      Conditional Access → + New policy**. 3. Name **CA-Block-Legacy**. 4.
-      **Assignments** * Users: *All users* (Exclude break-glass). * Cloud
-      apps: *All*. 5. **Conditions → Client apps** → select legacy
-      protocols. 6. **Access controls → Block access**. 7. Enable policy →
-      **Create**. #### Create MFA-Required Policy 1. New policy
-      **CA-MFA-All-Users**. 2. Users: All, exclude break-glass. 3.
-      Conditions: *Sign-in risk* = Medium & High. 4. Grant: **Require
-      multi-factor authentication**. 5. Enable → **Create**. ### 5
-      Validation * Legacy client sign-ins show **Blocked** in logs. *
-      Standard OWA login prompts for MFA and succeeds. ### 6 Rollback
-      Disable policies in Conditional Access or add break-glass account to
-      Exclusions.
-    </div>
-  </details>
-
-  <details>
-    <summary>
-      ★★★ <strong>Advanced SOP</strong> – ≈ 1 000 words · Secure Entra ID +
-      M365 Build-out
-    </summary>
-    <div class="md">
-      ### 1 Objective Stand-up a Microsoft 365 tenant meeting CIS Benchmarks
-      v2.0, secured end-to-end within 48 hours. ### 2 Roles &amp;
-      Responsibility | Role | Primary Actions | |------|-----------------| |
-      Project Lead | Own timeline &amp; stakeholder comms | | Global Admin |
-      Execute tenant-wide settings | | Security Admin | Configure Defender
-      &amp; audit | | Endpoint Admin | Intune compliance &amp; device
-      onboarding | ### 3 High-Level Workflow 1. Tenant creation &amp; domain
-      verification 2. Identity protection (MFA, CA, legacy auth disable) 3.
-      Service hardening (Exchange, SharePoint, Teams) 4. Endpoint security
-      via Intune 5. Backup &amp; monitoring hooks ### 4 Step-by-Step ####
-      4.1 Tenant Creation * Purchase Microsoft 365 Business Premium via CSP.
-      * Verify `contoso.com` with TXT record `MS=ms12345678`. #### 4.2
-      Identity Protection * Enforce MFA tenant-wide. * Disable legacy auth
-      in **Authentication methods → Legacy protocols**. * Conditional Access
-      policies: * **CA-Block-Legacy** (see Intermediate SOP) *
-      **CA-MFA-All-Users** * **CA-Compliant-Device-Required** #### 4.3
-      Service Hardening | Service | Key Action | |---------|------------| |
-      Exchange Online | Disable POP/IMAP; DKIM enabled; outbound spam alerts
-      | | SharePoint Online | Turn off anonymous links; default to org-only
-      view links | | Teams | Block guest access until policy review | ####
-      4.4 Endpoint Security via Intune 1. Automatic Enrollment → All. 2.
-      Windows Configuration profile → require BitLocker, Secure Boot, TPM2.
-      3. Endpoint Security → Antivirus → Cloud-delivered protection HIGH.
-      #### 4.5 Backup &amp; Monitoring * Enable Unified Audit Log. * Stream
-      logs to Azure Sentinel. * Veeam O365 backup daily 22:00 UTC. ### 5
-      Validation Checklist | Item | Tool | Pass/Fail |
-      |------|------|-----------| | MFA prompt on all accounts | User
-      sign-in | | | DKIM status = enabled | PowerShell
-      `Get-DkimSigningConfig` | | | Intune compliance &gt; 95 % | Intune
-      reports | | ### 6 Rollback &amp; DR 1. Disable Conditional Access
-      policies in reverse order. 2. Restore mailboxes/files via Veeam O365
-      (RPO ≤ 24 h). 3. Log incident in Confluence page “Entra Hardening
-      Rollback”. ### 7 References * CIS Microsoft 365 Foundations Benchmark
-      v2.0 * Microsoft Learn – Zero Trust identity pillar * NIST SP 800-63-3
-      (Digital Identity)
-    </div>
-  </details>
 </section>

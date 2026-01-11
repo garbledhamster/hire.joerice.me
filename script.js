@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
       path: "pages/km.html",
       title: "Knowledge-Management & SOPs · Hire Joe Rice",
     },
+    "tech-writing": {
+      path: "pages/tech-writing.html",
+      title: "Technical Writing · Hire Joe Rice",
+    },
     resume: { path: "pages/resume.html", title: "Resume Writing · Hire Joe Rice" },
     ai: { path: "pages/ai.html", title: "AI Coaching · Hire Joe Rice" },
     logo: { path: "pages/logo.html", title: "Logo Design · Hire Joe Rice" },
