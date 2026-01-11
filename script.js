@@ -10,50 +10,81 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById("mainNav");
   if (burger && nav) burger.onclick = () => nav.classList.toggle("open");
 
-  /* markdown conversion ------------------------------------------------- */
-  const render = el => {
-    const src =
-      el.tagName === "TEMPLATE" ? el.innerHTML.trim() : el.textContent.trim();
-    el.outerHTML = marked.parse(src);
-  };
-  document.querySelectorAll(".markdown > template, .md").forEach(render);
-
-  /* flip-card gallery + live demo modal -------------------------------- */
-  const modal = document.getElementById("demoModal"),
-    frame = document.getElementById("demoFrame"),
-    closer = document.getElementById("closeDemo");
-
-  /* helper to open modal and lock scroll */
-  const openDemo = url => {
-    frame.src = url;
-    modal.classList.add("show");
-    document.body.classList.add("noScroll"); // 🌟 freeze background
+  const pages = {
+    home: { path: "pages/home.html", title: "Hire Joe Rice · Services Hub" },
+    web: { path: "pages/web.html", title: "Web Design · Hire Joe Rice" },
+    it: { path: "pages/it.html", title: "IT Services · Hire Joe Rice" },
+    km: {
+      path: "pages/km.html",
+      title: "Knowledge-Management & SOPs · Hire Joe Rice",
+    },
+    resume: { path: "pages/resume.html", title: "Resume Writing · Hire Joe Rice" },
+    ai: { path: "pages/ai.html", title: "AI Coaching · Hire Joe Rice" },
   };
 
-  /* helper to close modal and unlock scroll */
-  const closeDemo = () => {
-    modal.classList.remove("show");
-    document.body.classList.remove("noScroll");
-    frame.removeAttribute("src"); // stop any media
+  const frame = document.getElementById("pageFrame");
+
+  const renderMarkdown = scope => {
+    if (!window.marked) return;
+    const render = el => {
+      const src =
+        el.tagName === "TEMPLATE" ? el.innerHTML.trim() : el.textContent.trim();
+      el.outerHTML = marked.parse(src);
+    };
+    scope.querySelectorAll(".markdown > template, .md").forEach(render);
   };
 
-  /* flip cards --------------------------------------------------------- */
-  document.querySelectorAll(".tpl").forEach(card => {
-    card.addEventListener("click", () => {
-      /* first click → flip */
-      if (!card.classList.contains("flip")) {
-        card.classList.add("flip");
-        return;
-      }
-      /* second click → open demo */
-      openDemo(card.dataset.demo);
-      card.classList.remove("flip"); // reset for next time
+  const initDemoModal = scope => {
+    const modal = scope.querySelector("#demoModal");
+    const demoFrame = scope.querySelector("#demoFrame");
+    const closer = scope.querySelector("#closeDemo");
+    if (!modal || !demoFrame) return;
+
+    const openDemo = url => {
+      demoFrame.src = url;
+      modal.classList.add("show");
+      document.body.classList.add("noScroll");
+    };
+
+    const closeDemo = () => {
+      modal.classList.remove("show");
+      document.body.classList.remove("noScroll");
+      demoFrame.removeAttribute("src");
+    };
+
+    scope.querySelectorAll(".tpl").forEach(card => {
+      card.addEventListener("click", () => {
+        if (!card.classList.contains("flip")) {
+          card.classList.add("flip");
+          return;
+        }
+        openDemo(card.dataset.demo);
+        card.classList.remove("flip");
+      });
     });
-  });
 
-  /* modal close triggers ----------------------------------------------- */
-  closer?.addEventListener("click", closeDemo);
-  modal?.addEventListener("click", e => {
-    if (e.target === modal) closeDemo(); // click outside iframe
-  });
+    closer?.addEventListener("click", closeDemo);
+    modal?.addEventListener("click", e => {
+      if (e.target === modal) closeDemo();
+    });
+  };
+
+  const loadPage = async pageKey => {
+    const page = pages[pageKey] || pages.home;
+    if (!frame) return;
+    document.title = page.title;
+    const response = await fetch(page.path);
+    const html = await response.text();
+    frame.innerHTML = html;
+    renderMarkdown(frame);
+    initDemoModal(frame);
+    if (location.hash) {
+      const target = frame.querySelector(location.hash);
+      target?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const pageKey =
+    new URLSearchParams(window.location.search).get("page") || "home";
+  loadPage(pageKey);
 });
