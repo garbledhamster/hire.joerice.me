@@ -113,6 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(pageKey, anchor);
   };
 
+  const loadTawkWidget = () => {
+    const tawkSrc = "https://embed.tawk.to/6963d7ec9ff04d197d5238ef/1jen0bau8";
+    if (document.querySelector(`script[src="${tawkSrc}"]`)) return;
+
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = tawkSrc;
+    script.charset = "UTF-8";
+    script.setAttribute("crossorigin", "*");
+
+    const firstScript = document.getElementsByTagName("script")[0];
+    if (firstScript?.parentNode) {
+      firstScript.parentNode.insertBefore(script, firstScript);
+    } else {
+      (document.head || document.body).appendChild(script);
+    }
+  };
+
   handleRoute();
   window.addEventListener("hashchange", handleRoute);
+  loadTawkWidget();
 });
