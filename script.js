@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     resume: { path: "pages/resume.html", title: "Resume Writing · Hire Joe Rice" },
     ai: { path: "pages/ai.html", title: "AI Coaching · Hire Joe Rice" },
+    logo: { path: "pages/logo.html", title: "Logo Design · Hire Joe Rice" },
   };
 
   const frame = document.getElementById("pageFrame");
