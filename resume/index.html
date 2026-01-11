@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Resume Writing · Hire Joe Rice</title>
+
+    <!-- brand fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Bebas+Neue&display=swap"
+      rel="stylesheet" />
+
+    <!-- shared stylesheet in repo root -->
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- ▸ shared header -->
+    <header class="siteHeader">
+      <div class="brand"><a href="../">hire.joerice.me</a></div>
+      <button class="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <a href="../">Home</a>
+        <a href="../web/">Web&nbsp;Design</a>
+        <a href="../it/">IT&nbsp;Services</a>
+        <a href="../km/">Knowledge&nbsp;Mgmt</a>
+        <a href="../resume/">Resume&nbsp;Writing</a>
+        <a href="../ai/">AI&nbsp;Coaching</a>
+        <a href="https://joerice.me/#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ▸ hero -->
+    <section class="hero">
+      <h1>Entry-Level Resume Writing That Gets Interviews</h1>
+      <p>
+        Starting out doesn’t mean starting from scratch. I’ll turn your
+        coursework, projects, and early experience into a resume that feels
+        confident, clear, and ready for hiring managers.
+      </p>
+      <div class="cta">
+        <a href="#plans" class="jump">See Packages</a>
+        <a href="https://joerice.me/#contact">Book a Resume Review</a>
+      </div>
+    </section>
+
+    <!-- ▸ included -->
+    <section class="stack" id="included">
+      <h2>What’s Included in Every Package</h2>
+      <p class="intro">
+        You get a modern, ATS-friendly format plus bullet points that show
+        impact—even if your experience comes from school, volunteer work, or
+        internships.
+      </p>
+      <ul class="checklist">
+        <li>
+          <strong>Discovery form + kickoff call:</strong> We clarify your goals,
+          target roles, and strengths.
+        </li>
+        <li>
+          <strong>Skill translation:</strong> Class projects, labs, or retail
+          jobs reframed into measurable outcomes.
+        </li>
+        <li>
+          <strong>Recruiter-friendly structure:</strong> Clean layout with clear
+          sections, strong verbs, and the right keywords.
+        </li>
+        <li>
+          <strong>One round of revisions:</strong> We fine-tune wording and
+          formatting together.
+        </li>
+        <li>
+          <strong>Delivery formats:</strong> Final PDF + editable Google Doc.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ▸ pricing -->
+    <section id="plans" class="pricing">
+      <h2>Entry-Level Resume Packages</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Best For</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Starter Refresh</td>
+            <td>Clean up an existing resume + sharper bullets</td>
+            <td>$75</td>
+          </tr>
+          <tr>
+            <td>Full Build</td>
+            <td>New resume from scratch + tailored summary</td>
+            <td>$120</td>
+          </tr>
+          <tr>
+            <td>Launch Bundle</td>
+            <td>Resume + LinkedIn headline + 3 cover letter templates</td>
+            <td>$175</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        Student, first-job, and career-switcher friendly. Payment due after
+        draft delivery.
+      </p>
+    </section>
+
+    <!-- ▸ footer -->
+    <footer>&copy; <span id="year"></span> Joe Rice.</footer>
+
+    <script>
+      /* footer year + hamburger menu */
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const burger = document.querySelector(".menuToggle"),
+        nav = document.getElementById("mainNav");
+      if (burger) burger.onclick = () => nav.classList.toggle("open");
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
