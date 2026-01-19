@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Steel City Auto · Demo</title>
 
     <!-- fonts & icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Condensed:wght@700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet">
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
       :root {
@@ -183,7 +183,7 @@
       /* spinning gear watermark */
       .hero::after {
         content: "\f085";
-        font-family: "Font Awesome 6 Free";
+        font-family: "Font Awesome 6 Free", sans-serif;
         font-weight: 900;
         position: absolute;
         bottom: 40px;
@@ -255,6 +255,12 @@
         pointer-events: none;
       }
 
+      /* INFO GRID */
+      .block i {
+        color: var(--accent);
+        font-size: 1.6rem;
+      }
+
       /* SERVICE CARDS */
       .services {
         display: grid;
@@ -277,15 +283,15 @@
         height: 140px;
         overflow: hidden;
       }
-      .card .top i {
-        font-size: 2.6rem;
-        color: var(--accent);
-        line-height: 140px;
-      }
       .card .top img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+      .card .top i {
+        font-size: 2.6rem;
+        color: var(--accent);
+        line-height: 140px;
       }
       .card:hover {
         transform: translateY(-10px) scale(1.03);
@@ -317,10 +323,6 @@
         gap: 14px;
         position: relative;
         overflow: hidden;
-      }
-      .block i {
-        color: var(--accent);
-        font-size: 1.6rem;
       }
       .block h3 {
         color: #fff;
@@ -445,7 +447,7 @@
     <!-- HERO -->
     <header class="hero">
       <div class="heroContent">
-        <h1>Repairs Done Right.<br />Back&nbsp;on&nbsp;the&nbsp;Road Fast.</h1>
+        <h1>Repairs Done Right.<br>Back&nbsp;on&nbsp;the&nbsp;Road Fast.</h1>
         <p>
           Honest service • Fair prices • Certified techs who live and breathe
           horsepower.
@@ -525,25 +527,25 @@
         <figure>
           <img
             src="https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1260"
-            alt="Service bays inside Steel City Auto" />
+            alt="Service bays inside Steel City Auto">
           <figcaption>State-of-the-art service bays.</figcaption>
         </figure>
         <figure>
           <img
             src="https://images.pexels.com/photos/3807450/pexels-photo-3807450.jpeg?auto=compress&cs=tinysrgb&w=1260"
-            alt="Technician checking tire pressure" />
+            alt="Technician checking tire pressure">
           <figcaption>We check every PSI so you don’t have to.</figcaption>
         </figure>
         <figure>
           <img
             src="https://images.pexels.com/photos/6873082/pexels-photo-6873082.jpeg?auto=compress&cs=tinysrgb&w=1260"
-            alt="Detailing and interior clean" />
+            alt="Detailing and interior clean">
           <figcaption>Freshly detailed &amp; ready to roll.</figcaption>
         </figure>
         <figure>
           <img
             src="https://images.pexels.com/photos/4489744/pexels-photo-4489744.jpeg?auto=compress&cs=tinysrgb&w=1260"
-            alt="Technician diagnosing engine" />
+            alt="Technician diagnosing engine">
           <figcaption>Computer diagnostics on every job.</figcaption>
         </figure>
       </div>
@@ -571,14 +573,14 @@
           <i class="fa-regular fa-clock"></i>
           <h3>Shop&nbsp;Hours</h3>
           <p>
-            Mon–Fri&nbsp;·&nbsp;7 AM – 6 PM<br />Sat&nbsp;·&nbsp;8 AM – 2 PM<br />Sun&nbsp;·&nbsp;Closed
+            Mon–Fri&nbsp;·&nbsp;7 AM – 6 PM<br>Sat&nbsp;·&nbsp;8 AM – 2 PM<br>Sun&nbsp;·&nbsp;Closed
           </p>
         </div>
         <!-- contact -->
         <div class="block">
           <i class="fa-solid fa-phone"></i>
           <h3>Call&nbsp;Us</h3>
-          <p>(555)&nbsp;555-0150<br />service@steelcityauto.demo</p>
+          <p>(555)&nbsp;555-0150<br>service@steelcityauto.demo</p>
         </div>
         <!-- actions -->
         <div class="block">
