@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Whitford Athenaeum</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@700&family=Cinzel+Decorative:wght@700&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="tour.css" />
+      rel="stylesheet">
+    <link rel="stylesheet" href="tour.css">
     <style>
       :root {
         --bg: #fdfcf7;
@@ -365,7 +365,7 @@
       <div class="aboutWrap">
         <img
           src="https://picsum.photos/seed/founders/820/620"
-          alt="Founders photograph" />
+          alt="Founders photograph">
         <div>
           <p>
             Patron Matilda Whitford envisioned a sanctuary where “learning might
@@ -385,13 +385,13 @@
       <div class="gallery">
         <img
           src="https://picsum.photos/seed/gallery1/600/400"
-          alt="Marble staircase" />
+          alt="Marble staircase">
         <img
           src="https://picsum.photos/seed/gallery2/600/400"
-          alt="Winter Garden" />
+          alt="Winter Garden">
         <img
           src="https://picsum.photos/seed/gallery3/600/400"
-          alt="Rare map room" />
+          alt="Rare map room">
       </div>
       <div class="timeline">
         <p><span>1891</span> – Grand opening with lantern procession</p>
@@ -490,10 +490,10 @@
       <h2 style="text-align: center">Correspond With Us</h2>
       <div class="contactGrid">
         <form>
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="Email Address" />
+          <input type="text" placeholder="Full Name">
+          <input type="email" placeholder="Email Address">
           <textarea rows="5" placeholder="Message"></textarea>
-          <button>Send Enquiry</button>
+          <button type="button">Send Enquiry</button>
         </form>
         <div
           style="
@@ -517,9 +517,9 @@
 
     <footer>
       Whitford Athenaeum &nbsp;·&nbsp; A non-profit sanctuary for public
-      learning since&nbsp;1891<br />
+      learning since&nbsp;1891<br>
       © <span id="yr"></span> Whitford Athenaeum &nbsp;·&nbsp; Riverton,
-      State&nbsp;12345<br />
+      State&nbsp;12345<br>
       <a href="#" data-page="contact">Contact&nbsp;Us</a> ·
       <a href="#" data-page="location">Directions</a> ·
       <a href="https://www.whitfordathenaeum.org/policies" target="_blank"
@@ -532,16 +532,20 @@
       const pages = [...document.querySelectorAll(".page")];
       const links = [...document.querySelectorAll("header a")];
       function show(id) {
-        pages.forEach(p => p.classList.toggle("active", p.id === id));
-        links.forEach(l => l.classList.toggle("active", l.dataset.page === id));
+        pages.forEach(p => {
+          p.classList.toggle("active", p.id === id);
+        });
+        links.forEach(l => {
+          l.classList.toggle("active", l.dataset.page === id);
+        });
         window.scrollTo(0, 0);
       }
-      links.forEach(l =>
+      links.forEach(l => {
         l.addEventListener("click", e => {
           e.preventDefault();
           show(l.dataset.page);
-        })
-      );
+        });
+      });
       document.body.addEventListener("click", e => {
         const tg = e.target.closest("[data-page]");
         if (tg && tg.tagName !== "A") {
